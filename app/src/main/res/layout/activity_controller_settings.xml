@@ -47,10 +47,10 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
+        android:inputType="text"
         android:ems="10"
         android:id="@+id/ipAdress"
-        android:text="127.0.0.1"
+        android:text="@string/_127_0_0_1"
         android:layout_marginTop="25dp"
         android:layout_below="@+id/back"
         android:layout_alignParentLeft="true"

@@ -14,34 +14,36 @@ import java.net.UnknownHostException;
 
 public class Client {
 
-    private String ipAdress;
-    private int port;
-    private PrintStream print;
+    //private String ipAdress;
+   // private int port;
+    private PrintStream printStream;
     private Socket socket;
     private static final String TAG = "Client";
 
     public void connect(String ipAdress, int port) {
-        this.ipAdress = ipAdress;
-        this.port = port;
         Log.i(TAG, "connecting and shit");
         try {
-            this.socket = new Socket(ipAdress, port);
-
+            Log.i(TAG, "connecting and shit socket");
+            socket = new Socket(ipAdress, port);
+            Log.i(TAG, "connecting and shit2");
             OutputStream outputStream = socket.getOutputStream();
-            this.print = new PrintStream(outputStream);
-            Log.i(TAG, "connecting and shit");
+            Log.i(TAG, "connecting and shit3");
+            this.printStream = new PrintStream(outputStream);
+            Log.i(TAG, "connecting and shit4");
+       //     printStream.print("carl is an idiot");
+         //   socket.close();
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+         //   e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+           // e.printStackTrace();
         }
 
     }
 
     public void sendCommands(String command) {
-        print.print(command);
+        printStream.print(command);
 
     }
 

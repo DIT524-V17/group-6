@@ -11,7 +11,7 @@ import android.widget.EditText;
 public class ControllerSettings extends AppCompatActivity {
     EditText ipAdress, port;
     Button connect;
-    Client client = new Client();
+
     private static final String TAG = "ControlerSettings";
 
     @Override
@@ -33,7 +33,7 @@ public class ControllerSettings extends AppCompatActivity {
             String ip =  ipAdress.getText().toString();
             int lastPort = Integer.parseInt(port.getText().toString());
             Log.i(TAG, "Clicking on connect");
-            client.connect(ip, lastPort);
+            MainActivity.client.connect(ip, lastPort);
         }
 
 

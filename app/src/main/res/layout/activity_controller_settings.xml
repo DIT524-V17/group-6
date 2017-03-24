@@ -50,7 +50,7 @@
         android:inputType="text"
         android:ems="10"
         android:id="@+id/ipAdress"
-        android:text="@string/_127_0_0_1"
+        android:text="198.168.42.1"
         android:layout_marginTop="25dp"
         android:layout_below="@+id/back"
         android:layout_alignParentLeft="true"

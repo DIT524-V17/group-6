@@ -15,7 +15,7 @@
         android:id="@+id/driveBackward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="down"
+        android:onClick="backward"
         app:srcCompat="@mipmap/down"
         android:layout_below="@+id/driveForward"
         android:layout_alignParentRight="true"
@@ -26,19 +26,20 @@
         android:id="@+id/turnRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="turnRight"
         android:layout_alignTop="@+id/turnLeft"
         android:layout_marginLeft="14dp"
         android:layout_marginStart="14dp"
         android:layout_toEndOf="@+id/turnLeft"
         android:layout_toRightOf="@+id/turnLeft"
-        android:onClick="down"
+
         app:srcCompat="@mipmap/right" />
 
     <ImageButton
         android:id="@+id/driveForward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="down"
+        android:onClick="forward"
         app:srcCompat="@mipmap/up"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
@@ -51,7 +52,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/driveForward"
-        android:onClick="down"
+        android:onClick="turnLeft"
         app:srcCompat="@mipmap/left" />
 
     <Button

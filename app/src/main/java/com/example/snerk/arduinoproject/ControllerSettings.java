@@ -40,7 +40,7 @@ public class ControllerSettings extends AppCompatActivity {
     };
 
 
-
+ 
 
     public void Back(View view) {
 

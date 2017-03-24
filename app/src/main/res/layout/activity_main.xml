@@ -12,24 +12,58 @@
     tools:context="com.example.snerk.arduinoproject.MainActivity">
 
     <ImageButton
+        android:id="@+id/driveBackward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/arrow_down_float"
-        android:id="@+id/imageButton2"
-        android:layout_marginBottom="27dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/imageButton"
-        android:layout_alignStart="@+id/imageButton"
-        android:onClick="down" />
-
-    <Button
-        android:text="Settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/settings"
-        android:onClick="Settings"
-        android:layout_alignParentTop="true"
+        android:onClick="down"
+        app:srcCompat="@mipmap/down"
+        android:layout_below="@+id/driveForward"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:elevation="0dp" />
+        android:layout_marginTop="20dp" />
+
+    <ImageButton
+        android:id="@+id/turnRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/turnLeft"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_toEndOf="@+id/turnLeft"
+        android:layout_toRightOf="@+id/turnLeft"
+        android:onClick="down"
+        app:srcCompat="@mipmap/right" />
+
+    <ImageButton
+        android:id="@+id/driveForward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="down"
+        app:srcCompat="@mipmap/up"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageButton
+        android:id="@+id/turnLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/driveForward"
+        android:onClick="down"
+        app:srcCompat="@mipmap/left" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:elevation="0dp"
+        android:onClick="Settings"
+        android:text="Settings" />
+
+
 </RelativeLayout>

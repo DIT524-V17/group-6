@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
-static String TAG = "MainActivity";
+    static String TAG = "MainActivity";
     public static Client client = new Client();
 
     @Override

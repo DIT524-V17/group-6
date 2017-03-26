@@ -8,14 +8,9 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-/**
- * Created by snerk on 2017-03-07.
- */
 
 public class Client {
 
-    //private String ipAdress;
-   // private int port;
     private PrintStream printStream;
     private Socket socket;
     private static final String TAG = "Client";
@@ -30,8 +25,8 @@ public class Client {
             Log.i(TAG, "connecting and shit3");
             this.printStream = new PrintStream(outputStream);
             Log.i(TAG, "connecting and shit4");
-       //     printStream.print("carl is an idiot");
-         //   socket.close();
+            printStream.print("carl is an idiot");
+            disconnect();
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
          //   e.printStackTrace();

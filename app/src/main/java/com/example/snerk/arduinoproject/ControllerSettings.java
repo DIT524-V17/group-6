@@ -19,13 +19,12 @@ public class ControllerSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controller_settings);
 
-
         ipAdress = (EditText) findViewById(R.id.ipAdress);
         port = (EditText) findViewById(R.id.port);
         connect = (Button)findViewById(R.id.connect);
         connect.setOnClickListener(buttonConnectOnClickListener);
+
     }
-////
 
     View.OnClickListener buttonConnectOnClickListener = new View.OnClickListener(){
         public void onClick(View arg0) {
@@ -39,13 +38,10 @@ public class ControllerSettings extends AppCompatActivity {
 
     };
 
-
- 
-
     public void Back(View view) {
 
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
     }
 }
-//      }
+

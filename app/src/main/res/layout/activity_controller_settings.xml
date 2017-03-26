@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main2"
@@ -38,7 +39,7 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/port"
-        android:text="8080"
+        android:text="port"
         android:layout_marginBottom="14dp"
         android:layout_above="@+id/connect"
         android:layout_alignLeft="@+id/ipAdress"
@@ -50,7 +51,7 @@
         android:inputType="text"
         android:ems="10"
         android:id="@+id/ipAdress"
-        android:text="198.168.42.1"
+        android:text="@string/ip"
         android:layout_marginTop="25dp"
         android:layout_below="@+id/back"
         android:layout_alignParentLeft="true"

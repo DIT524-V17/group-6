@@ -22,13 +22,8 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "Application is running ^^");
 
         ImageButton turnRight = (ImageButton) (findViewById(R.id.turnRight));
-
-
         ImageButton turnLeft = (ImageButton) (findViewById(R.id.turnLeft));
-
         ImageButton forward = (ImageButton) (findViewById(R.id.driveForward));
-
-
         ImageButton backwards = (ImageButton) (findViewById(R.id.driveBackward));
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

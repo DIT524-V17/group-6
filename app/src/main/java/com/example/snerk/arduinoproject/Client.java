@@ -26,7 +26,7 @@ public class Client {
             this.printStream = new PrintStream(outputStream);
             Log.i(TAG, "connecting and shit4");
             printStream.print("carl is an idiot");
-            disconnect();
+      
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
          //   e.printStackTrace();

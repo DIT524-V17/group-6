@@ -39,7 +39,7 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/port"
-        android:text="port"
+        android:text="@integer/port"
         android:layout_marginBottom="14dp"
         android:layout_above="@+id/connect"
         android:layout_alignLeft="@+id/ipAdress"

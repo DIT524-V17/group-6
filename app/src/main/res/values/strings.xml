@@ -2,5 +2,5 @@
     <string name="app_name">ArduinoProject</string>
     <string name="_127_0_0_1">127.0.0.1</string>
     <string name="ip">198.168.42.1</string>
-    <string name="port">8080</string>
+    <integer name="port">8080</integer>
 </resources>

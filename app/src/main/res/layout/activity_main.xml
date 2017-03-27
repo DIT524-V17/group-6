@@ -36,13 +36,12 @@
         android:id="@+id/driveForward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/up"
+        android:layout_above="@+id/turnLeft"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    app:srcCompat="@mipmap/up"
-    android:layout_above="@+id/turnLeft"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true" />
-
-<ImageButton
+    <ImageButton
     android:id="@+id/turnLeft"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -53,7 +52,7 @@
     android:layout_toLeftOf="@+id/turnRight"
     android:layout_toStartOf="@+id/turnRight" />
 
-<Button
+    <Button
     android:id="@+id/settings"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -64,7 +63,7 @@
     android:onClick="Settings"
     android:text="Settings" />
 
-<Button
+    <Button
     android:id="@+id/button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -75,6 +74,18 @@
     android:text="Connect"
     android:layout_alignLeft="@+id/settings"
     android:layout_alignStart="@+id/settings" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="distance"
+        android:textSize="50sp"
+        android:layout_alignBottom="@+id/button"
+        android:layout_toLeftOf="@+id/turnLeft"
+        android:layout_toStartOf="@+id/turnLeft"
+        android:layout_marginRight="89dp"
+        android:layout_marginEnd="89dp" />
 
 
 </RelativeLayout>

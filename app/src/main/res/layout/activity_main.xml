@@ -36,45 +36,45 @@
         android:id="@+id/driveForward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="forward"
-        app:srcCompat="@mipmap/up"
-        android:layout_above="@+id/turnLeft"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
-    <ImageButton
-        android:id="@+id/turnLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="turnLeft"
-        app:srcCompat="@mipmap/left"
-        android:layout_marginBottom="22dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/turnRight"
-        android:layout_toStartOf="@+id/turnRight" />
+    app:srcCompat="@mipmap/up"
+    android:layout_above="@+id/turnLeft"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true" />
 
-    <Button
-        android:id="@+id/settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:elevation="0dp"
-        android:onClick="Settings"
-        android:text="Settings" />
+<ImageButton
+    android:id="@+id/turnLeft"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="turnLeft"
+    app:srcCompat="@mipmap/left"
+    android:layout_marginBottom="22dp"
+    android:layout_alignParentBottom="true"
+    android:layout_toLeftOf="@+id/turnRight"
+    android:layout_toStartOf="@+id/turnRight" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/settings"
-        android:onClick="autoConnect"
-        android:text="Connect"
-        android:layout_alignLeft="@+id/settings"
-        android:layout_alignStart="@+id/settings" />
+<Button
+    android:id="@+id/settings"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:elevation="0dp"
+    android:onClick="Settings"
+    android:text="Settings" />
+
+<Button
+    android:id="@+id/button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/settings"
+    android:onClick="autoConnect"
+    android:text="Connect"
+    android:layout_alignLeft="@+id/settings"
+    android:layout_alignStart="@+id/settings" />
 
 
 </RelativeLayout>

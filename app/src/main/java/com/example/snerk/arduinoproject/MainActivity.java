@@ -30,23 +30,21 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         forward.setOnTouchListener(new View.OnTouchListener() {
-
             @Override
             public boolean onTouch(View view, MotionEvent motionevent) {
                 int action = motionevent.getAction();
                 if (action == MotionEvent.ACTION_DOWN) {
                     Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
-                    client.sendCommands("forward");
+                    client.sendCommands("forward:\n");
                 } else if (action == MotionEvent.ACTION_UP) {
                     Log.i("repeatBtn", "MotionEvent.ACTION_UP");
-                    client.sendCommands("backwards");
+                    client.sendCommands("stop:\n");
                 }//end else
                 return false;
             } //end onTouch
         }); //end b my button
 
     }
-
 
     public void turnRight(View view) {
 
@@ -58,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "Application is turning left ^^");
         client.sendCommands("turnLeft:\n");
     }
-    public void forward(View view) {
+   /* public void forward(View view) {
 
         Log.i(TAG, "Application is turning forward ^^");
         client.sendCommands("forward:\n");
-    }
+    }*/
 
     public void backward(View view) {
 
@@ -73,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     public void autoConnect (View view) {
         client.autoConnect();
     }
+
     public void Settings(View view) {
 
         startActivity(new Intent(getApplicationContext(), ControllerSettings.class));

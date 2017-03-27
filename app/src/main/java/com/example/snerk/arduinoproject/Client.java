@@ -17,19 +17,14 @@ public class Client {
     private static final String TAG = "Client";
 
     public void connect(String ipAdress, int port) {
-        Log.i(TAG, "connecting and shit");
         try {
-            //socket.setSoTimeout(4000);
-            Log.i(TAG, "socket");
-            socket = new Socket(ipAdress, port);
 
-            Log.i(TAG, "connecting and shit2");
+            Log.i(TAG, "opening socket");
+            socket = new Socket(ipAdress, port);
             OutputStream outputStream = socket.getOutputStream();
-            Log.i(TAG, "connecting and shit3");
             this.printStream = new PrintStream(outputStream);
-            Log.i(TAG, "connecting and shit4");
-           // printStream.print("carl is an idiot");
-      
+
+            Log.i(TAG, "done connecting");
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
          //   e.printStackTrace();
@@ -41,14 +36,12 @@ public class Client {
 
     public void autoConnect() {
         try {
+            Log.i(TAG, "autoConnecting");
             socket = new Socket(staticIp, staticPort);
 
-            Log.i(TAG, "connecting and shit2");
             OutputStream outputStream = socket.getOutputStream();
-            Log.i(TAG, "connecting and shit3");
             this.printStream = new PrintStream(outputStream);
-            Log.i(TAG, "connecting and shit4");
-
+            Log.i(TAG, "done connecting");
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
             //   e.printStackTrace();

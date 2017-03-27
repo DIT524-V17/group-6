@@ -17,23 +17,20 @@
         android:layout_height="wrap_content"
         android:onClick="backward"
         app:srcCompat="@mipmap/down"
-        android:layout_below="@+id/driveForward"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp" />
+        android:layout_alignBottom="@+id/turnLeft"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:id="@+id/turnRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="turnRight"
-        android:layout_alignTop="@+id/turnLeft"
-        android:layout_marginLeft="14dp"
-        android:layout_marginStart="14dp"
-        android:layout_toEndOf="@+id/turnLeft"
-        android:layout_toRightOf="@+id/turnLeft"
 
-        app:srcCompat="@mipmap/right" />
+        app:srcCompat="@mipmap/right"
+        android:layout_alignTop="@+id/turnLeft"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ImageButton
         android:id="@+id/driveForward"
@@ -41,19 +38,20 @@
         android:layout_height="wrap_content"
         android:onClick="forward"
         app:srcCompat="@mipmap/up"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_above="@+id/turnLeft"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:id="@+id/turnLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/driveForward"
         android:onClick="turnLeft"
-        app:srcCompat="@mipmap/left" />
+        app:srcCompat="@mipmap/left"
+        android:layout_marginBottom="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/turnRight"
+        android:layout_toStartOf="@+id/turnRight" />
 
     <Button
         android:id="@+id/settings"

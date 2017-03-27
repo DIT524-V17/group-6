@@ -6,6 +6,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -27,6 +28,22 @@ public class MainActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        forward.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionevent) {
+                int action = motionevent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
+                    client.sendCommands("forward");
+                } else if (action == MotionEvent.ACTION_UP) {
+                    Log.i("repeatBtn", "MotionEvent.ACTION_UP");
+                    client.sendCommands("backwards");
+                }//end else
+                return false;
+            } //end onTouch
+        }); //end b my button
 
     }
 

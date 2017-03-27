@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import arduino.Arduino;
+import com.fazecast.jSerialComm.*;
+import arduino.*;
 
 class host
 {
@@ -20,7 +21,7 @@ class host
         Arduino arduino;
 
         try{
-            serverSocket = new ServerSocket(0);
+            serverSocket = new ServerSocket(1337);
             System.out.println(serverSocket.getInetAddress() + ", " + serverSocket.toString());
             System.out.println("I'm waiting here: "
                     + serverSocket.getLocalPort());
@@ -33,7 +34,7 @@ class host
                     new InputStreamReader(socket.getInputStream());
             bufferedReader = new BufferedReader(inputStreamReader);
 
-            arduino = new Arduino("/dev/tty", 9600);
+            arduino = new Arduino("/dev/ttyACM0", 9600);
             arduino.openConnection();
             while (bufferedReader != null)
             {

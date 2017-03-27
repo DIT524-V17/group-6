@@ -10,10 +10,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     static String TAG = "MainActivity";
     public static Client client = new Client();
+    //public TextView distance = (TextView) findViewById(R.id.distance);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton turnLeft = (ImageButton) (findViewById(R.id.turnLeft));
         ImageButton forward = (ImageButton) (findViewById(R.id.driveForward));
         ImageButton backwards = (ImageButton) (findViewById(R.id.driveBackward));
+
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void autoConnect (View view) {
+
         client.autoConnect();
     }
 

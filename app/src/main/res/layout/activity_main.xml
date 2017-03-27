@@ -66,5 +66,17 @@
         android:onClick="Settings"
         android:text="Settings" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/settings"
+        android:onClick="autoConnect"
+        android:text="Connect"
+        android:layout_alignLeft="@+id/settings"
+        android:layout_alignStart="@+id/settings" />
+
 
 </RelativeLayout>

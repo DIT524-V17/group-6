@@ -52,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "Application is turning backward ^^");
         client.sendCommands("backwards:\n");
     }
+
+    public void autoConnect (View view) {
+        client.autoConnect();
+    }
     public void Settings(View view) {
 
         startActivity(new Intent(getApplicationContext(), ControllerSettings.class));

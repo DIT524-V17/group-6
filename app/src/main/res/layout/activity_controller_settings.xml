@@ -43,7 +43,7 @@
         android:layout_marginBottom="14dp"
         android:layout_above="@+id/connect"
         android:layout_alignLeft="@+id/ipAdress"
-        android:layout_alignStart="@+id/ipAdress" />
+        android:layout_alignStart="@+id/ipAdress"/>
 
     <EditText
         android:layout_width="wrap_content"

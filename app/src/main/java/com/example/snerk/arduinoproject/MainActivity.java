@@ -6,7 +6,6 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -35,23 +34,23 @@ public class MainActivity extends AppCompatActivity {
     public void turnRight(View view) {
 
         Log.i(TAG, "Application is turning right ^^");
-        client.sendCommands("turnRight");
+        client.sendCommands("turnRight:\n");
     }
     public void turnLeft(View view) {
 
         Log.i(TAG, "Application is turning left ^^");
-        client.sendCommands("turnLeft");
+        client.sendCommands("turnLeft:\n");
     }
     public void forward(View view) {
 
         Log.i(TAG, "Application is turning forward ^^");
-        client.sendCommands("forward");
+        client.sendCommands("forward:\n");
     }
 
     public void backward(View view) {
 
         Log.i(TAG, "Application is turning backward ^^");
-        client.sendCommands("backwards");
+        client.sendCommands("backwards:\n");
     }
     public void Settings(View view) {
 

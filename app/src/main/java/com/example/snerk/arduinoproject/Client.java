@@ -18,14 +18,16 @@ public class Client {
     public void connect(String ipAdress, int port) {
         Log.i(TAG, "connecting and shit");
         try {
+            //socket.setSoTimeout(4000);
             Log.i(TAG, "connecting and shit socket");
             socket = new Socket(ipAdress, port);
+
             Log.i(TAG, "connecting and shit2");
             OutputStream outputStream = socket.getOutputStream();
             Log.i(TAG, "connecting and shit3");
             this.printStream = new PrintStream(outputStream);
             Log.i(TAG, "connecting and shit4");
-            printStream.print("carl is an idiot");
+           // printStream.print("carl is an idiot");
       
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block

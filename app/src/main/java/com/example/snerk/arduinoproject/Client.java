@@ -13,6 +13,7 @@ import java.net.UnknownHostException;
 
 
 public class Client {
+
     private String staticIp = "192.168.42.1";
     private int staticPort = 1337;
     private PrintStream printStream;

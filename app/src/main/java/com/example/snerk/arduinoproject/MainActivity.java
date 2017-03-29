@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
     static String TAG = "MainActivity";
@@ -32,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        //VideoView video = (VideoView) findViewById(R.id.videoView);
+        //video.start();
+
+        String distance = "9";
+        TextView textView = (TextView) findViewById(R.id.distance);
+        textView.setText(distance);
+
         forward.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionevent) {
@@ -46,29 +54,48 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             } //end onTouch
         }); //end b my button
-
-    }
-
-    public void turnRight(View view) {
-
-        Log.i(TAG, "Application is turning right ^^");
-        client.sendCommands("turnRight:\n");
-    }
-    public void turnLeft(View view) {
-
-        Log.i(TAG, "Application is turning left ^^");
-        client.sendCommands("turnLeft:\n");
-    }
-   /* public void forward(View view) {
-
-        Log.i(TAG, "Application is turning forward ^^");
-        client.sendCommands("forward:\n");
-    }*/
-
-    public void backward(View view) {
-
-        Log.i(TAG, "Application is turning backward ^^");
-        client.sendCommands("backwards:\n");
+        turnRight.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionevent) {
+                int action = motionevent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
+                    client.sendCommands("turnRight:\n");
+                } else if (action == MotionEvent.ACTION_UP) {
+                    Log.i("repeatBtn", "MotionEvent.ACTION_UP");
+                    client.sendCommands("stop:\n");
+                }//end else
+                return false;
+            } //end onTouch
+        }); //end b my button
+        turnLeft.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionevent) {
+                int action = motionevent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
+                    client.sendCommands("turnLeft:\n");
+                } else if (action == MotionEvent.ACTION_UP) {
+                    Log.i("repeatBtn", "MotionEvent.ACTION_UP");
+                    client.sendCommands("stop:\n");
+                }//end else
+                return false;
+            } //end onTouch
+        }); //end b my button
+        backwards.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionevent) {
+                int action = motionevent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
+                    client.sendCommands("backwards:\n");
+                } else if (action == MotionEvent.ACTION_UP) {
+                    Log.i("repeatBtn", "MotionEvent.ACTION_UP");
+                    client.sendCommands("stop:\n");
+                }//end else
+                return false;
+            } //end onTouch
+        }); //end b my button
     }
 
     public void autoConnect (View view) {

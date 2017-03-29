@@ -20,8 +20,8 @@ public class Client {
     private Socket socket;
     private BufferedReader bufferedReader;
     private static final String TAG = "Client";
-    private boolean measureDistance = false;
-
+    private boolean measureDistance = true;
+    String distance;
 
     public void connect(String ipAdress, int port) {
         try {
@@ -48,9 +48,11 @@ public class Client {
     public void setRunning(boolean running){
         this.measureDistance = true;
     }
+
     public void arduinoReader()
     {
-        try { Log.i(TAG, "wants to read from arduino");
+        try {
+            Log.i(TAG, "wants to read from arduino");
             InputStream inputStream = socket.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             Log.i(TAG, "inputstream ready");
@@ -61,6 +63,7 @@ public class Client {
                 String line = bufferedReader.readLine();
                 if(line != null){
                     Log.i(TAG, line);
+                 //   this.distance = line;
                 }
             }
 

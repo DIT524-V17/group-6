@@ -12,6 +12,7 @@ class host
 {
     public static void main(String srgs[])
     {
+
         ServerSocket serverSocket = null;
         Socket socket = null;
         BufferedReader bufferedReader = null;

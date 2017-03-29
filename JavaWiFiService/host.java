@@ -4,6 +4,7 @@ import java.net.Socket;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,12 +17,17 @@ class host
     {
         ServerSocket serverSocket = null;
         Socket socket = null;
+
         BufferedReader bufferedReader = null;
         PrintStream printStream = null;
         Arduino arduino;
 
+
         try{
             serverSocket = new ServerSocket(1337);
+
+            socket = serverSocket.accept();
+
             System.out.println(serverSocket.getInetAddress() + ", " + serverSocket.toString());
             System.out.println("I'm waiting here: "
                     + serverSocket.getLocalPort());
@@ -34,11 +40,18 @@ class host
                     new InputStreamReader(socket.getInputStream());
             bufferedReader = new BufferedReader(inputStreamReader);
 
+            OutputStream outputStream = socket.getOutputStream();
+            printWriter = new PrintWriter(outputStream, true);
+
             arduino = new Arduino("/dev/ttyACM0", 9600);
             arduino.openConnection();
+
+
             while (bufferedReader != null)
             {
-            	arduino.serialWrite(bufferedReader.readLine());
+                String serialRead = arduino.readSerial();
+                arduino.serialWrite(bufferedReader.readLine());
+                printWriter.println(serialRead);
             }
             
             /**

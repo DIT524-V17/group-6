@@ -16,7 +16,7 @@ import android.widget.VideoView;
 public class MainActivity extends AppCompatActivity {
     static String TAG = "MainActivity";
     public static Client client = new Client();
-    //public TextView distance = (TextView) findViewById(R.id.distance);
+    public static TextView distance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +29,17 @@ public class MainActivity extends AppCompatActivity {
         ImageButton forward = (ImageButton) (findViewById(R.id.driveForward));
         ImageButton backwards = (ImageButton) (findViewById(R.id.driveBackward));
 
-
+        distance = (TextView) findViewById(R.id.distance);
+        distance.setText("distance");
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         //VideoView video = (VideoView) findViewById(R.id.videoView);
         //video.start();
 
-        String distance = "9";
-        TextView textView = (TextView) findViewById(R.id.distance);
-        textView.setText(distance);
+
+
+
 
         forward.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -101,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
     public void autoConnect (View view) {
 
         client.autoConnect();
+        client.sensorReader();
+    }
+    public void startMeasure (View view) {
+        client.readSensor();
+
     }
 
     public void Settings(View view) {

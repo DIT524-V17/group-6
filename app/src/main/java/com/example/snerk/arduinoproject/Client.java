@@ -19,9 +19,10 @@ public class Client {
     private PrintStream printStream;
     private Socket socket;
     private BufferedReader bufferedReader;
+    private InputStream inputStream;
+    private InputStreamReader inputStreamReader;
     private static final String TAG = "Client";
-    private boolean measureDistance = true;
-    String distance;
+    private String distance;
 
     public void connect(String ipAdress, int port) {
         try {
@@ -45,34 +46,36 @@ public class Client {
          connect(staticIp, staticPort);
         }
 
-    public void setRunning(boolean running){
-        this.measureDistance = true;
-    }
 
-    public void arduinoReader()
+    public void sensorReader()
     {
         try {
             Log.i(TAG, "wants to read from arduino");
-            InputStream inputStream = socket.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            this.inputStream = socket.getInputStream();
+            this.inputStreamReader = new InputStreamReader(inputStream);
             Log.i(TAG, "inputstream ready");
-            bufferedReader = new BufferedReader(inputStreamReader);
+            this.bufferedReader = new BufferedReader(inputStreamReader);
             Log.i(TAG, "buffered reader reeady");
-            while(measureDistance){
-                //bufferedReader block the code
-                String line = bufferedReader.readLine();
-                if(line != null){
-                    Log.i(TAG, line);
-                 //   this.distance = line;
-                }
-            }
-
-
-            }
+        }
         catch (IOException e){
-            e.printStackTrace();
+        e.printStackTrace();
         }
     }
+
+    public void readSensor()
+    {
+        try {
+            String line = this.bufferedReader.readLine();
+            if (line != null && line != "0") {
+                Log.i(TAG, line);
+                MainActivity.distance.setText(distance);
+            }
+        }
+          catch (IOException e){
+        e.printStackTrace();
+        }
+    }
+
 
     public void sendCommands(String command) {
         printStream.print(command);

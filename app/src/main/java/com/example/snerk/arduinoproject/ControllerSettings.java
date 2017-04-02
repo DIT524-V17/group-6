@@ -14,6 +14,7 @@ public class ControllerSettings extends AppCompatActivity {
 
     private static final String TAG = "ControlerSettings";
 
+    //Fins the various buttons in the XML-file
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +27,7 @@ public class ControllerSettings extends AppCompatActivity {
 
     }
 
+    //Connects to the chosen IP/Port
     View.OnClickListener buttonConnectOnClickListener = new View.OnClickListener(){
         public void onClick(View arg0) {
 
@@ -38,6 +40,7 @@ public class ControllerSettings extends AppCompatActivity {
 
     };
 
+    //Takes you Back
     public void Back(View view) {
 
         startActivity(new Intent(getApplicationContext(), MainActivity.class));

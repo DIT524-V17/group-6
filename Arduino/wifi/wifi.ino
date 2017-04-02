@@ -1,19 +1,14 @@
 #include <Smartcar.h>
 
-char ssid[] = "SWAT";      // your network SSID (name)
-char pass[] = "raspberry";   // your network password
-//int keyIndex = 0;                 // your network key Index number (needed only for WEP)
+//char ssid[] = "SWAT";      // your network SSID (name)
+//char pass[] = "raspberry";   // your network password
 
-//int status = WL_IDLE_STATUS; //status of wifi
-
-//WiFiServer server(80); //declare server object and specify port, 80 is port used for internet
 
 Gyroscope gyro;
 Car car;
 SR04 sensor;
 char  inputBuffer[15];
-int j = 10;
-int a = 50;
+
 
 
 void setup()

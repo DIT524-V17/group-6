@@ -14,6 +14,8 @@ import java.net.UnknownHostException;
 
 public class Client {
 
+
+    // Initalize private variables.
     private String staticIp = "192.168.42.1";
     private int staticPort = 1337;
     private PrintStream printStream;
@@ -24,10 +26,13 @@ public class Client {
     private static final String TAG = "Client";
     private String distance;
 
+
+    //Connecting to the RaspberryPI-server
     public void connect(String ipAdress, int port) {
         try {
 
-            Log.i(TAG, "opening socket");
+
+            //Opening socket and making sure you can send data
             socket = new Socket(ipAdress, port);
             OutputStream outputStream = socket.getOutputStream();
             this.printStream = new PrintStream(outputStream);
@@ -42,11 +47,13 @@ public class Client {
         }
     }
 
+    // Using the same method as above, but with predefined IP
     public void autoConnect() {
          connect(staticIp, staticPort);
         }
 
 
+    // Making sure the app is ready to read data from the sensors(and possibly other data)
     public void sensorReader()
     {
         try {
@@ -62,6 +69,7 @@ public class Client {
         }
     }
 
+    //Reading from the sensors and updating the TextView "Distance" in the Main View
     public void readSensor()
     {
         try {
@@ -76,12 +84,13 @@ public class Client {
         }
     }
 
-
+    // Seding commands to the Ardunio via the PI
     public void sendCommands(String command) {
         printStream.print(command);
 
     }
 
+    // Closing the socket
     public void disconnect() {
         try {
             socket.close();

@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     static String TAG = "MainActivity";
     public static Client client = new Client();
     public static TextView distance;
-
+    Thread t;
     @Override
 
     // Creating the instance and finding the diffrent buttons and texts from the XML File
@@ -37,6 +37,26 @@ public class MainActivity extends AppCompatActivity {
 
         //VideoView video = (VideoView) findViewById(R.id.videoView);
         //video.start();
+
+        // Creates a new running thread that updates every second
+         t = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                client.readSensor();
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
 
 
 
@@ -111,9 +131,10 @@ public class MainActivity extends AppCompatActivity {
         client.sensorReader();
     }
 
-    // Starts reading from the sensors
+    // Starts reading from the sensors by intilizing a new thread.
     public void startMeasure (View view) {
-        client.readSensor();
+        t.start();
+
 
     }
 

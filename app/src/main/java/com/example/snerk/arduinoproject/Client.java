@@ -24,7 +24,7 @@ public class Client {
     private InputStream inputStream;
     private InputStreamReader inputStreamReader;
     private static final String TAG = "Client";
-    private String distance;
+    public static String distance;
 
 
     //Connecting to the RaspberryPI-server
@@ -69,15 +69,16 @@ public class Client {
         }
     }
 
+
     //Reading from the sensors and updating the TextView "Distance" in the Main View
     public void readSensor()
     {
         try {
-            String line = this.bufferedReader.readLine();
-            if (line != null && line != "0") {
-                Log.i(TAG, line);
-                MainActivity.distance.setText(distance);
-            }
+            distance = this.bufferedReader.readLine();
+           // if (distance != null && distance != "0") {
+           //     Log.i(TAG, distance);
+           //     MainActivity.distance.setText(distance);
+            //}
         }
           catch (IOException e){
         e.printStackTrace();

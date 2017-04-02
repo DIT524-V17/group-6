@@ -27,6 +27,7 @@ public class ControllerSettings extends AppCompatActivity {
 
     }
 
+
     //Connects to the chosen IP/Port
     View.OnClickListener buttonConnectOnClickListener = new View.OnClickListener(){
         public void onClick(View arg0) {

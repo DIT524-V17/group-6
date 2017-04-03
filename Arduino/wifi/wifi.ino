@@ -10,6 +10,7 @@ char pass[] = "raspberry";   // your network password
 Gyroscope gyro;
 Car car;
 SR04 sensor;
+SR04  backSensor;
 char  inputBuffer[15];
 int i=40;
 int j=0;
@@ -21,19 +22,31 @@ void setup() {
   gyro.attach();
   gyro.begin();
   sensor.attach(53, 54);
+  backSensor.attach(36, 37);
   car.begin(gyro);
   Serial.begin(9600);
   
 
 }
-
  void getData(){
-     unsigned int distance = sensor.getDistance();
+     unsigned int frontDistance = sensor.getDistance(); 
+     unsigned int backDistance = backSensor.getDistance();
+     if (car.getSpeed() >= 0 ){
+           Serial.print(frontDistance);
+     }
+     else {
+      Serial.print(backDistance);
+     }
+}
+
+/** 
+oid getData(){
+  //   unsigned int distance = sensor.getDistance();
      if (distance !=0 ){
            Serial.print(distance);
      }
 }
-
+**/
 void move (){
    
      Serial.readBytes(inputBuffer, Serial.available());

@@ -100,7 +100,7 @@
             android:layout_alignParentTop="true"
             android:width="200dp"
             android:text="distance"
-            android:textColor="#F00"
+            android:textColor="#000000"
             android:textSize="36sp" />
 
         <Button

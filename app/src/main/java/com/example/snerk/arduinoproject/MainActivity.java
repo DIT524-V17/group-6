@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton backwards = (ImageButton) (findViewById(R.id.driveBackward));
 
         distance = (TextView) findViewById(R.id.distance);
-        distance.setText("distance");
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -51,13 +51,10 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     while (!isInterrupted()) {
+                        Log.i(TAG, "Running new thread");
                         Thread.sleep(100);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                client.readSensor();
-                            }
-                        });
+                        Log.i(TAG, "Reading sensor in new thread");
+                        client.readSensor();
                     }
                 } catch (InterruptedException e) {
                 }
@@ -132,13 +129,15 @@ public class MainActivity extends AppCompatActivity {
 
     // The button that connects you automatically to the predefined IP/Port. Intalizes the sensorReader
     public void autoConnect (View view) {
-
+        Log.i(TAG, "Autoconnect");
         client.autoConnect();
+        Log.i(TAG, "initialize sensor");
         client.sensorReader();
     }
 
     // Starts reading from the sensors by intilizing a new thread.
     public void startMeasure (View view) {
+        Log.i(TAG, "Starting new threading");
         t.start();
 
 

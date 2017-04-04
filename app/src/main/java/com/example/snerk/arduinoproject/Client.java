@@ -40,48 +40,46 @@ public class Client {
             Log.i(TAG, "done connecting");
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
-         //   e.printStackTrace();
+            //   e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
-           // e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
     // Using the same method as above, but with predefined IP
     public void autoConnect() {
-         connect(staticIp, staticPort);
-        }
+        connect(staticIp, staticPort);
+    }
 
 
     // Making sure the app is ready to read data from the sensors(and possibly other data)
-    public void sensorReader()
-    {
+    public void sensorReader() {
         try {
-            Log.i(TAG, "wants to read from arduino");
+            Log.i(TAG, "wants to read from Arduino");
             this.inputStream = socket.getInputStream();
             this.inputStreamReader = new InputStreamReader(inputStream);
             Log.i(TAG, "inputstream ready");
             this.bufferedReader = new BufferedReader(inputStreamReader);
-            Log.i(TAG, "buffered reader reeady");
-        }
-        catch (IOException e){
-        e.printStackTrace();
+            Log.i(TAG, "buffered reader ready");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
 
     //Reading from the sensors and updating the TextView "Distance" in the Main View
-    public void readSensor()
-    {
+    public void readSensor() {
         try {
+            Log.i(TAG, "trying to read from sensors");
             distance = this.bufferedReader.readLine();
             // if (distance != null && distance != "0") {
-                Log.i(TAG, distance);
-            //     MainActivity.distance.setText(distance);
-            // }
-        }
-          catch (IOException e){
-        e.printStackTrace();
+            Log.i(TAG, distance);
+
+           // MainActivity.distance.setText(distance);
+            Log.i(TAG, "done with sensors");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

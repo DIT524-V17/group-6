@@ -12,9 +12,9 @@ public class ControllerSettings extends AppCompatActivity {
     EditText ipAdress, port;
     Button connect;
 
-    private static final String TAG = "ControlerSettings";
+    private static final String TAG = "ControllerSettings";
 
-    //Fins the various buttons in the XML-file
+    //Finds the various buttons in the XML-file
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,17 +22,17 @@ public class ControllerSettings extends AppCompatActivity {
 
         ipAdress = (EditText) findViewById(R.id.ipAdress);
         port = (EditText) findViewById(R.id.port);
-        connect = (Button)findViewById(R.id.connect);
+        connect = (Button) findViewById(R.id.connect);
         connect.setOnClickListener(buttonConnectOnClickListener);
 
     }
 
 
     //Connects to the chosen IP/Port
-    View.OnClickListener buttonConnectOnClickListener = new View.OnClickListener(){
+    View.OnClickListener buttonConnectOnClickListener = new View.OnClickListener() {
         public void onClick(View arg0) {
 
-            String ip =  ipAdress.getText().toString();
+            String ip = ipAdress.getText().toString();
             int lastPort = Integer.parseInt(port.getText().toString());
             Log.i(TAG, "Clicking on connect");
             MainActivity.client.connect(ip, lastPort);

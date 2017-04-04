@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     while (!isInterrupted()) {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     client.sendCommands("stop:\n");
                 }
                 return false;
-            } //end onTouch
+            }
         });
 
         turnRight.setOnTouchListener(new View.OnTouchListener() {
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     client.sendCommands("stop:\n");
                 }
                 return false;
-            } //end onTouch
+            }
         });
 
         turnLeft.setOnTouchListener(new View.OnTouchListener() {
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     client.sendCommands("stop:\n");
                 }
                 return false;
-            } //end onTouch
+            }
         });
 
         backwards.setOnTouchListener(new View.OnTouchListener() {
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     client.sendCommands("stop:\n");
                 }
                 return false;
-            } //end onTouch
+            }
         });
     }
 

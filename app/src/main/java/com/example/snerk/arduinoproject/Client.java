@@ -75,10 +75,10 @@ public class Client {
     {
         try {
             distance = this.bufferedReader.readLine();
-           // if (distance != null && distance != "0") {
-           //     Log.i(TAG, distance);
-           //     MainActivity.distance.setText(distance);
-            //}
+            // if (distance != null && distance != "0") {
+                Log.i(TAG, distance);
+            //     MainActivity.distance.setText(distance);
+            // }
         }
           catch (IOException e){
         e.printStackTrace();

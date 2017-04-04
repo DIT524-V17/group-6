@@ -37,12 +37,14 @@ public class MainActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+/*
 
         VideoView video = (VideoView) findViewById(R.id.videoView);
         String vidAdress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
         Uri vidUri = Uri.parse(vidAdress);
         video.setVideoURI(vidUri);
         video.start();
+*/
 
         // Creates a new running thread that updates every second
          t = new Thread() {

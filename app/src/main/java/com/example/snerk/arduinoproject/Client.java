@@ -26,7 +26,6 @@ public class Client {
     private InputStreamReader inputStreamReader;
     private static final String TAG = "Client";
     public static String distance;
-    private int backgroundColorVariator;
 
     //Connecting to the RaspberryPI-server
     public void connect(String ipAdress, int port) {
@@ -79,7 +78,7 @@ public class Client {
 
            // MainActivity.distance.setText(distance);
             Log.i(TAG, "done with sensors");
-            setBackgroundColor(Integer.parseInt(distance));
+            //setBackgroundColor(Integer.parseInt(distance));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,26 +101,5 @@ public class Client {
         }
 
 
-    }
-
-    public void setBackgroundColor(int distanceInt){
-        if (distanceInt > 50){
-            MainActivity.distance.setBackgroundColor(Color.GREEN);
-        }
-
-        else if (20 < distanceInt && distanceInt < 50){
-            MainActivity.distance.setBackgroundColor(Color.YELLOW);
-        }
-
-        else if (20 > distanceInt) {
-
-            if (backgroundColorVariator == -1) {
-                MainActivity.distance.setBackgroundColor(Color.RED);
-                backgroundColorVariator = 1;
-            } else {
-                MainActivity.distance.setBackgroundColor(Color.WHITE);
-                backgroundColorVariator = -1;
-            }
-        }
     }
 }

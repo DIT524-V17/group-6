@@ -13,13 +13,16 @@ import android.widget.TextView;
 import android.net.Uri;
 import android.widget.MediaController;
 import android.widget.VideoView;
+import android.os.Handler;
 
 
 public class MainActivity extends AppCompatActivity {
     static String TAG = "MainActivity";
     public static Client client = new Client();
-    public static TextView distance;
+    private int backgroundColorVariator;
+    Handler distanceHandler = new Handler();
     Thread t;
+    TextView distance;
     @Override
 
     // Creating the instance and finding the diffrent buttons and texts from the XML File
@@ -37,33 +40,45 @@ public class MainActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-/*
 
-        VideoView video = (VideoView) findViewById(R.id.videoView);
+       /* VideoView video = (VideoView) findViewById(R.id.videoView);
         String vidAdress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
         Uri vidUri = Uri.parse(vidAdress);
         video.setVideoURI(vidUri);
-        video.start();
-*/
+        video.start();*/
+
 
         // Creates a new running thread that updates every second
-         t = new Thread() {
+        t = new Thread() {
 
             @Override
             public void run() {
                 try {
                     while (!isInterrupted()) {
+
                         Log.i(TAG, "Running new thread");
                         Thread.sleep(100);
                         Log.i(TAG, "Reading sensor in new thread");
                         client.readSensor();
+                        Log.i(TAG, client.distance);
+                        //distance.setBackgroundColor(28);
+
                     }
                 } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+
+                runOnUiThread (new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i(TAG, "Should be here");
+                        distance.setText("18");
+                        distance.invalidate();
+
+                    }
+            });
             }
         };
-
-
 
 
         // On Touch listener (makes sure you get one command when you hold the button down
@@ -152,4 +167,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void setBackgroundColor(int distanceInt){
+        if (distanceInt > 50){
+            //MainActivity.distance.setBackgroundColor(Color.GREEN);
+        }
+
+        else if (20 < distanceInt && distanceInt < 50){
+            // MainActivity.distance.setBackgroundColor(Color.YELLOW);
+        }
+
+        else if (20 > distanceInt) {
+
+            if (backgroundColorVariator == -1) {
+                //   MainActivity.distance.setBackgroundColor(Color.RED);
+                backgroundColorVariator = 1;
+            } else {
+                //  MainActivity.distance.setBackgroundColor(Color.WHITE);
+                backgroundColorVariator = -1;
+            }
+        }
+    }
 }

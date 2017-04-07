@@ -1,6 +1,7 @@
 package com.example.snerk.arduinoproject;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 import android.os.Handler;
 import android.os.Message;
+
+import java.util.concurrent.RunnableFuture;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton forward = (ImageButton) (findViewById(R.id.driveForward));
         ImageButton backwards = (ImageButton) (findViewById(R.id.driveBackward));
 
-      //  distance = (TextView) findViewById(R.id.distance);
+        distance = (TextView) findViewById(R.id.distance);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -69,7 +72,19 @@ public class MainActivity extends AppCompatActivity {
                             Log.i(TAG, "Reading sensor in new thread");
                             client.readSensor();
                             Log.i(TAG, client.distance);
-                            //distance.setBackgroundColor(28);
+
+                            runOnUiThread(new Runnable() {
+                             public void run(){
+                                 if(client.distance != "0") {
+                                     distance.setText(client.distance);
+                                 };
+                                 if (!client.distance.isEmpty()){
+                                     setBackgroundColor(Integer.parseInt(client.distance));
+                                     distance.invalidate();
+                                 }
+
+                             }
+                            });
 
                         }
                         handler.sendEmptyMessage(0);
@@ -81,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
              t =new Thread(R);
-             t.start();
+
 
 
 
@@ -172,20 +187,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void setBackgroundColor(int distanceInt){
         if (distanceInt > 50){
-            //MainActivity.distance.setBackgroundColor(Color.GREEN);
+            distance.setBackgroundColor(Color.GREEN);
         }
 
         else if (20 < distanceInt && distanceInt < 50){
-            // MainActivity.distance.setBackgroundColor(Color.YELLOW);
+             distance.setBackgroundColor(Color.YELLOW);
         }
 
         else if (20 > distanceInt) {
 
             if (backgroundColorVariator == -1) {
-                //   MainActivity.distance.setBackgroundColor(Color.RED);
+               distance.setBackgroundColor(Color.RED);
                 backgroundColorVariator = 1;
             } else {
-                //  MainActivity.distance.setBackgroundColor(Color.WHITE);
+         distance.setBackgroundColor(Color.WHITE);
                 backgroundColorVariator = -1;
             }
         }

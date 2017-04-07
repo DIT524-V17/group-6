@@ -14,17 +14,25 @@ import android.net.Uri;
 import android.widget.MediaController;
 import android.widget.VideoView;
 import android.os.Handler;
+import android.os.Message;
 
 
 public class MainActivity extends AppCompatActivity {
     static String TAG = "MainActivity";
     public static Client client = new Client();
     private int backgroundColorVariator;
-    Handler distanceHandler = new Handler();
+   // Handler distanceHandler = new Handler();
     Thread t;
     TextView distance;
-    @Override
 
+
+     Handler handler = new Handler(){
+
+        public void handleMessage(Message msg) {
+            distance = (TextView) findViewById(R.id.distance);
+            distance.setText(client.distance);
+        }
+    };
     // Creating the instance and finding the diffrent buttons and texts from the XML File
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton forward = (ImageButton) (findViewById(R.id.driveForward));
         ImageButton backwards = (ImageButton) (findViewById(R.id.driveBackward));
 
-        distance = (TextView) findViewById(R.id.distance);
+      //  distance = (TextView) findViewById(R.id.distance);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -47,103 +55,98 @@ public class MainActivity extends AppCompatActivity {
         video.setVideoURI(vidUri);
         video.start();*/
 
-
         // Creates a new running thread that updates every second
-        t = new Thread() {
 
-            @Override
-            public void run() {
-                try {
-                    while (!isInterrupted()) {
+            Runnable R = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        while (!t.isInterrupted()) {
 
-                        Log.i(TAG, "Running new thread");
-                        Thread.sleep(100);
-                        Log.i(TAG, "Reading sensor in new thread");
-                        client.readSensor();
-                        Log.i(TAG, client.distance);
-                        //distance.setBackgroundColor(28);
 
+                            Log.i(TAG, "Running new thread");
+                            Thread.sleep(100);
+                            Log.i(TAG, "Reading sensor in new thread");
+                            client.readSensor();
+                            Log.i(TAG, client.distance);
+                            //distance.setBackgroundColor(28);
+
+                        }
+                        handler.sendEmptyMessage(0);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+
+
                 }
+            };
+             t =new Thread(R);
+             t.start();
 
-                runOnUiThread (new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i(TAG, "Should be here");
-                        distance.setText("18");
-                        distance.invalidate();
-
-                    }
-            });
-            }
-        };
 
 
         // On Touch listener (makes sure you get one command when you hold the button down
         // and another when you release the button. For all 4 diretions.
-        forward.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionevent) {
-                int action = motionevent.getAction();
-                if (action == MotionEvent.ACTION_DOWN) {
-                    Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
-                    client.sendCommands("forward:\n");
-                } else if (action == MotionEvent.ACTION_UP) {
-                    Log.i("repeatBtn", "MotionEvent.ACTION_UP");
-                    client.sendCommands("stop:\n");
-                }
-                return false;
+    forward.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionevent) {
+            int action = motionevent.getAction();
+            if (action == MotionEvent.ACTION_DOWN) {
+                Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
+                client.sendCommands("forward:\n");
+            } else if (action == MotionEvent.ACTION_UP) {
+                Log.i("repeatBtn", "MotionEvent.ACTION_UP");
+                client.sendCommands("stop:\n");
             }
-        });
+            return false;
+        }
+    });
 
-        turnRight.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionevent) {
-                int action = motionevent.getAction();
-                if (action == MotionEvent.ACTION_DOWN) {
-                    Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
-                    client.sendCommands("turnRight:\n");
-                } else if (action == MotionEvent.ACTION_UP) {
-                    Log.i("repeatBtn", "MotionEvent.ACTION_UP");
-                    client.sendCommands("stop:\n");
-                }
-                return false;
+    turnRight.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionevent) {
+            int action = motionevent.getAction();
+            if (action == MotionEvent.ACTION_DOWN) {
+                Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
+                client.sendCommands("turnRight:\n");
+            } else if (action == MotionEvent.ACTION_UP) {
+                Log.i("repeatBtn", "MotionEvent.ACTION_UP");
+                client.sendCommands("stop:\n");
             }
-        });
+            return false;
+        }
+    });
 
-        turnLeft.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionevent) {
-                int action = motionevent.getAction();
-                if (action == MotionEvent.ACTION_DOWN) {
-                    Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
-                    client.sendCommands("turnLeft:\n");
-                } else if (action == MotionEvent.ACTION_UP) {
-                    Log.i("repeatBtn", "MotionEvent.ACTION_UP");
-                    client.sendCommands("stop:\n");
-                }
-                return false;
+    turnLeft.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionevent) {
+            int action = motionevent.getAction();
+            if (action == MotionEvent.ACTION_DOWN) {
+                Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
+                client.sendCommands("turnLeft:\n");
+            } else if (action == MotionEvent.ACTION_UP) {
+                Log.i("repeatBtn", "MotionEvent.ACTION_UP");
+                client.sendCommands("stop:\n");
             }
-        });
+            return false;
+        }
+    });
 
-        backwards.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionevent) {
-                int action = motionevent.getAction();
-                if (action == MotionEvent.ACTION_DOWN) {
-                    Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
-                    client.sendCommands("backwards:\n");
-                } else if (action == MotionEvent.ACTION_UP) {
-                    Log.i("repeatBtn", "MotionEvent.ACTION_UP");
-                    client.sendCommands("stop:\n");
-                }
-                return false;
+    backwards.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionevent) {
+            int action = motionevent.getAction();
+            if (action == MotionEvent.ACTION_DOWN) {
+                Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
+                client.sendCommands("backwards:\n");
+            } else if (action == MotionEvent.ACTION_UP) {
+                Log.i("repeatBtn", "MotionEvent.ACTION_UP");
+                client.sendCommands("stop:\n");
             }
-        });
-    }
-
+            return false;
+        }
+    });
+}
     // The button that connects you automatically to the predefined IP/Port. Intalizes the sensorReader
     public void autoConnect (View view) {
         Log.i(TAG, "Autoconnect");

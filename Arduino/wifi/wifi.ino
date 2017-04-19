@@ -16,14 +16,15 @@ int j=0;
 unsigned long previousMillis =0;
 unsigned long sensorMillis=0;
 unsigned long interval=1000;
-unsigned long update = 1000;   
+unsigned long update = 500;   
 
 
 void setup() {
+  
   gyro.attach();
   gyro.begin();
   sensor.attach(53, 52);
-  backSensor.attach(37, 36);
+  backSensor.attach(31, 40);
   car.begin(gyro);
   Serial.begin(9600);    
   
@@ -32,15 +33,13 @@ void setup() {
 
  void getData(){
      
-     //unsigned long CurrentTime = millis(); 
      unsigned int frontDistance = sensor.getDistance(); 
      //unsigned int backDistance = backSensor.getDistance();
-     //if (car.getSpeed() >= 0 && frontDistance!= 0  ){
+     if (car.getSpeed() >= 0 && frontDistance!= 0  ){
           String Frontdistance= String (frontDistance);
-          //if (CurrentTime - sensorMillis > update ){
+          
               Serial.println(Frontdistance + "\n");
-          //    sensorMillis = CurrentTime;
-          //}
+     }
      //else if (car.getSpeed() < 0 && backDistance!=0)  {
      //            String Backdistance = String (backDistance);
 //
@@ -60,10 +59,10 @@ void getData(){
      }
 }
 **/
-void move (){
+ void move (){
       
      Serial.readBytes(inputBuffer, Serial.available());
-    //delay(5000);
+    // delay(5000);
     // Serial.print("I got this ->");
     // Serial.print(inputBuffer);
     // Serial.println("<-");
@@ -71,7 +70,7 @@ void move (){
    
     unsigned long currentTime = millis();
   
-    String currentline = Serial.readStringUntil(":");
+    String currentline = Serial.readStringUntil(':');
    
     if (currentline.startsWith("forward")) {             // GET the car to move
             car.setAngle(0);
@@ -79,25 +78,25 @@ void move (){
 
       for (int j=0 ; j<5 ; j++ ) {
        
-      //  if (currentTime - previousMillis > interval){
+        if (currentTime - previousMillis > interval){
           
-        //    previousMillis=currentTime;
-         //   i+=5;
-          //  car.setSpeed(i);
-        }//
+            previousMillis=currentTime;
+            i+=5;
+            car.setSpeed(i);
+        }
         
       }
         
-   
+    }
      if (currentline.startsWith("turnLeft")) {    // GET the car to turn left
-        car.setSpeed(50);
+        car.setSpeed(i);
         car.setAngle(-75);
     
 
 
     }
       if (currentline.startsWith("turnRight")) {             // GET the car to turn right
-      car.setSpeed(50);
+      car.setSpeed(i);
       car.setAngle(75);
 
 
@@ -111,28 +110,32 @@ void move (){
      if (currentline.startsWith("stop")) {
                   car.setSpeed(0);
 
-    //   for (int j=10 ; j<1 ; j-- ) {
-      //  if (currentTime - previousMillis > interval){
+      for (int j=10 ; j<1 ; j-- ) {
+        if (currentTime - previousMillis > interval){
             
-        //    previousMillis=currentTime;
-          //   i-=5;
-          //  car.setSpeed(i);
-      //  }
+            previousMillis=currentTime;
+            i-=5;
+           car.setSpeed(i);
+        }
      
             
      }
     }
- 
+    
   
+    
+ }
+ void loop() {
+      unsigned long CurrentTime = millis(); 
+        move();
 
-void loop() {
-  
-  if (Serial.available() > 0) {
-      move();
-  }
-  Serial.flush();
-  getData();
-  Serial.flush();
+          if (CurrentTime - sensorMillis > update ){
+             getData();
+             sensorMillis = CurrentTime;
+             
+          }
+      
+       Serial.flush();
 
 
 

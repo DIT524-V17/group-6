@@ -24,8 +24,7 @@ import java.util.concurrent.RunnableFuture;
 public class MainActivity extends AppCompatActivity {
     static String TAG = "MainActivity";
     public static Client client = new Client();
-   // private int backgroundColorVariator;
-    // Handler distanceHandler = new Handler();
+    //Handler distanceHandler = new Handler();
     Thread t;
     TextView distance;
     VideoView video;
@@ -60,13 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Creates a new running thread that updates every second
+        t = new Thread() {
 
-        Runnable R = new Runnable() {
             @Override
             public void run() {
                 try {
-                    while (!t.isInterrupted()) {
-
+                    while (!isInterrupted()) {
 
                         Log.i(TAG, "Running new thread");
                         Thread.sleep(100);
@@ -167,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     // The button that connects you automatically to the predefined IP/Port. Intalizes the sensorReader
     public void autoConnect (View view) {
         Log.i(TAG, "Autoconnect");
@@ -197,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "Starting new threading");
         t.start();
 
+
     }
 
     // Takes you to the Settings View
@@ -218,6 +218,6 @@ public class MainActivity extends AppCompatActivity {
         else if (20 > distanceInt) {
                 distance.setBackgroundColor(Color.RED);
 
-            }
         }
     }
+}

@@ -37,18 +37,20 @@ public class Client {
             OutputStream outputStream = socket.getOutputStream();
             this.printStream = new PrintStream(outputStream);
 
+
             Log.i(TAG, "done connecting");
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
-            //   e.printStackTrace();
+            Log.i(TAG, e.toString());
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            // e.printStackTrace();
+            Log.i(TAG, e.toString());
         }
     }
 
     // Using the same method as above, but with predefined IP
     public void autoConnect() {
+        Log.i(TAG, "HERE AUTOCONNECT");
         connect(staticIp, staticPort);
     }
 

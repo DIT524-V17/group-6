@@ -12,11 +12,11 @@
     tools:context="com.example.snerk.arduinoproject.MainActivity">
 
 
-<!--
-    <VideoView
+
+ §<VideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
+        android:layout_height="match_parent" />
 
 
     <RelativeLayout
@@ -95,11 +95,13 @@
             android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/driveForward"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:width="200dp"
-            android:text="distance"
+            android:layout_alignRight="@+id/driveForward"
+            android:width="68dp"
+            android:text="00"
             android:textColor="#000000"
             android:textSize="36sp" />
 

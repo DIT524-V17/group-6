@@ -1,7 +1,6 @@
 package com.example.snerk.arduinoproject;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,30 +14,18 @@ import android.net.Uri;
 import android.widget.MediaController;
 import android.widget.VideoView;
 import android.os.Handler;
-import android.os.Message;
-import android.widget.Toast;
-
-import java.util.concurrent.RunnableFuture;
 
 
 public class MainActivity extends AppCompatActivity {
     static String TAG = "MainActivity";
     public static Client client = new Client();
-    //Handler distanceHandler = new Handler();
+    private int backgroundColorVariator;
+    Handler distanceHandler = new Handler();
     Thread t;
     TextView distance;
     VideoView video;
-    MediaController mediaController;
+    @Override
 
-
-
-    Handler handler = new Handler(){
-
-        public void handleMessage(Message msg) {
-            distance = (TextView) findViewById(R.id.distance);
-            distance.setText(client.distance);
-        }
-    };
     // Creating the instance and finding the diffrent buttons and texts from the XML File
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

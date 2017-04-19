@@ -1,5 +1,6 @@
 package com.example.snerk.arduinoproject;
 
+import android.graphics.Color;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import android.net.Uri;
 import android.widget.MediaController;
 import android.widget.VideoView;
 import android.os.Handler;
+import android.widget.Toast;
+import android.os.Message;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,9 +26,16 @@ public class MainActivity extends AppCompatActivity {
     Handler distanceHandler = new Handler();
     Thread t;
     TextView distance;
+    MediaController mediaController;
     VideoView video;
-    @Override
 
+    Handler handler = new Handler(){
+
+        public void handleMessage(Message msg) {
+            distance = (TextView) findViewById(R.id.distance);
+            distance.setText(client.distance);
+        }
+    };
     // Creating the instance and finding the diffrent buttons and texts from the XML File
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
         video = (VideoView) findViewById(R.id.videoView);
 
 
-        // Creates a new running thread that updates every second
-        t = new Thread() {
 
+        // Creates a new running thread that updates every second
+        Runnable R = new Runnable() {
             @Override
             public void run() {
                 try {
-                    while (!isInterrupted()) {
+                    while (!t.isInterrupted()) {
 
                         Log.i(TAG, "Running new thread");
                         Thread.sleep(100);
@@ -86,9 +96,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         t =new Thread(R);
-
-
-
 
         // On Touch listener (makes sure you get one command when you hold the button down
         // and another when you release the button. For all 4 diretions.

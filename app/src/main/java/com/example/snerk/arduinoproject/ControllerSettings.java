@@ -11,7 +11,7 @@ import android.widget.EditText;
 public class ControllerSettings extends AppCompatActivity {
     EditText ipAdress, port;
     Button connect;
-
+    MainActivity main;
     private static final String TAG = "ControllerSettings";
 
     //Finds the various buttons in the XML-file
@@ -36,6 +36,7 @@ public class ControllerSettings extends AppCompatActivity {
             int lastPort = Integer.parseInt(port.getText().toString());
             Log.i(TAG, "Clicking on connect");
             MainActivity.client.connect(ip, lastPort);
+            main.playStream(ip);
         }
 
 

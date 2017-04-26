@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     TextView distance;
     MediaController mediaController;
     VideoView video;
-
+ 
     Handler handler = new Handler(){
 
         public void handleMessage(Message msg) {
@@ -166,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
         client.autoConnect();
         Log.i(TAG, "initialize sensor");
         client.sensorReader();
+        playStream("192.168.42.1:5000");
+
     }
 
     //The method for displaying the video feed

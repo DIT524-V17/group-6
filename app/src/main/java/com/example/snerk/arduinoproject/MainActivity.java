@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     TextView distance;
     MediaController mediaController;
     VideoView video;
- 
+
     Handler handler = new Handler(){
 
         public void handleMessage(Message msg) {
@@ -166,13 +166,16 @@ public class MainActivity extends AppCompatActivity {
         client.autoConnect();
         Log.i(TAG, "initialize sensor");
         client.sensorReader();
-        playStream("192.168.42.1:5000");
+
 
     }
 
+
     //The method for displaying the video feed
-    public void playStream(String src) {
-        Uri UriSrc = Uri.parse(src);
+    public void startVideo(View View) {
+
+        Log.i(TAG, "Starting The Videofeed");
+        Uri UriSrc = Uri.parse("http://192.168.42.1:8090");
         if (UriSrc == null) {
             Toast.makeText(MainActivity.this,
                     "UriSrc == null", Toast.LENGTH_LONG).show();
@@ -183,11 +186,11 @@ public class MainActivity extends AppCompatActivity {
             video.start();
 
             Toast.makeText(MainActivity.this,
-                    "Connect: " + src,
+                    "Connect: " + "http://192.168.42.1:8090",
                     Toast.LENGTH_LONG).show();
         }
     }
-    // Starts reading from the sensors by intilizing a new thread.
+    // Starts reading from the sensors by initializing a new thread.
     public void startMeasure (View view) {
         Log.i(TAG, "Starting new threading");
         t.start();

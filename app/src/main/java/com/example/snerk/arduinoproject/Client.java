@@ -87,11 +87,13 @@ public class Client {
         }
     }
 
-    // Seding commands to the Ardunio via the PI
+    // Sending commands to the Arduino via the PI
     public void sendCommands(String command) {
         printStream.print(command);
 
     }
+
+    
 
     // Closing the socket
     public void disconnect() {

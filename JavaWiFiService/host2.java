@@ -1,8 +1,3 @@
-/**
- * 
- */
-package rasbperry;
-
 import java.io.BufferedReader;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -16,8 +11,8 @@ import java.util.logging.Logger;
 import com.fazecast.jSerialComm.*;
 import arduino.*;
 
-class host2 {
-
+class host2test {
+	static Arduino arduino = null;
 	public static void main(String args[]) {
 
 		ServerSocket serverSocket = null;
@@ -25,9 +20,9 @@ class host2 {
 
 		BufferedReader bufferedReader = null;
 		PrintStream printStream = null;
-		Arduino arduino = null;
+		//Arduino arduino = null;
 		PrintWriter printWriter = null;
-
+		SerialPort serialPort = SerialPort.getCommPort("/dev/ttyACM0");
 		try {
 			serverSocket = new ServerSocket(1337);
 
@@ -45,18 +40,22 @@ class host2 {
 
 			arduino = new Arduino("/dev/ttyACM0", 9600);
 			arduino.openConnection();
-
+			
 			Thread t1 = new Thread(new Runnable() {
 				public void run() {
-					Arduino arduino2 = new Arduino("/dev/ttyACM0", 9600);
+					//arduino = new Arduino("/dev/ttyACM0", 9600);
 					PrintWriter printWriter = new PrintWriter(outputStream, true);
 					String serialRead;
-					arduino2.openConnection();
+					//arduino2.openConnection();
 					while (true) {
-						serialRead = arduino2.serialRead(1);
+						serialRead = arduino.serialRead(1);
 						printWriter.println(serialRead);
 						System.out.println(serialRead);
-
+						try{
+							Thread.sleep(100);
+						}catch (InterruptedException e) {
+							System.out.print(e.toString());
+						}
 						//arduino.serialWrite(bufferedReader.readLine());
 						//PrintWriter printWriter = new PrintWriter(outputStream, true); 
 						//printWriter.println(serialRead);
@@ -71,12 +70,36 @@ class host2 {
 				}
 			});
 			t1.start();
+			
+			String serialRead;
+			//byte[] newData;
 			while (bufferedReader != null) {
-
+				String command = bufferedReader.readLine();
 				//String serialRead = arduino.serialRead();
-				//System.out.println(bufferedReader.readLine());
+				System.out.println(command);
 				//total.append(line).append('\n');
-				arduino.serialWrite(bufferedReader.readLine());
+				arduino.serialWrite(command);
+				//System.out.println("yoyo");
+				
+				//if (command.startsWith("sensorRead")) {
+					//newData = new byte[serialPort.bytesAvailable()+1];
+					//int numRead = serialPort.readBytes(newData, newData.length);
+					//System.out.println("yoyo1");
+					//serialRead = arduino.serialRead(1);
+					//System.out.println(serialRead);
+					//if (serialRead.startsWith("sensorend")){
+					//	serialRead = arduino.serialRead(1);
+					//	printWriter.println(serialRead);
+					//	System.out.println(serialRead);
+					//}
+					//serialRead = "00";
+					//System.out.println("yoyo2");hello
+                                        //printWriter.println(serialRead);
+                                        //System.out.println(serialRead);
+					//System.out.println("yoyo3");
+				//}
+				
+				//System.out.println("yoyo4");
 				//printWriter.println(serialRead);
 				//System.out.println(serialRead);
 			}

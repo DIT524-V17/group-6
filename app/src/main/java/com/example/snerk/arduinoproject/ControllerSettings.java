@@ -36,10 +36,10 @@ public class ControllerSettings extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
-                    Log.i(TAG, "driveAuto");
+                    Log.i(TAG, "driveAuto:");
                     client.sendCommands("driveAuto");
                 } else {
-                    Log.i(TAG, "stopAuto");
+                    Log.i(TAG, "stopAuto:");
                     client.sendCommands("stopAuto");
                 }
             }

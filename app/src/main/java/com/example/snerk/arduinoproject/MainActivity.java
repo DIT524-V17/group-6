@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.net.Uri;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     };
     // Creating the instance and finding the diffrent buttons and texts from the XML File
     protected void onCreate(Bundle savedInstanceState) {
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i(TAG, "Application is running ^^");
@@ -184,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                     "UriSrc == null", Toast.LENGTH_LONG).show();
         } else {
             video.setVideoURI(UriSrc);
-            mediaController = new MediaController(this);
+            mediaController = new MediaController(this, false);
             video.setMediaController(mediaController);
             video.start();
 

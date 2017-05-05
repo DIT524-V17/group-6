@@ -56,4 +56,37 @@
         android:layout_below="@+id/back"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ipAdress"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Manual Connection" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ipAdress"
+        android:layout_marginLeft="71dp"
+        android:layout_marginStart="71dp"
+        android:layout_toEndOf="@+id/port"
+        android:layout_toRightOf="@+id/port"
+        android:text="ToggleButton"
+        android:textOff="Stopped"
+        android:textOn="Running" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Autonomous Driving"
+        android:layout_marginLeft="59dp"
+        android:layout_marginStart="59dp"
+        android:layout_above="@+id/ipAdress"
+        android:layout_toRightOf="@+id/ipAdress"
+        android:layout_toEndOf="@+id/ipAdress" />
 </RelativeLayout>

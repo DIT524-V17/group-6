@@ -64,11 +64,14 @@ public class MainActivity extends AppCompatActivity {
                     while (!t.isInterrupted()) {
 
                         Log.i(TAG, "Running new thread");
-                        Thread.sleep(100);
-                        Log.i(TAG, "Reading sensor in new thread");
-                        client.readSensor();
-                        Log.i(TAG, client.distance);
 
+                        Log.i(TAG, "Reading sensor in new thread");
+
+
+                        client.sendCommands("sensorRead:\n");
+                        client.readSensor();
+                        Thread.sleep(500);
+                        Log.i(TAG, client.distance);
                         runOnUiThread(new Runnable() {
                             public void run(){
                                 try {

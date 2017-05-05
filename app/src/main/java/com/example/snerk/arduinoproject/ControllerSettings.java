@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ToggleButton;
+
+import static com.example.snerk.arduinoproject.MainActivity.client;
 
 public class ControllerSettings extends AppCompatActivity {
     EditText ipAdress, port;
     Button connect;
     MainActivity main;
+    ToggleButton toggleButton;
 
     private static final String TAG = "ControllerSettings";
 
@@ -25,7 +30,17 @@ public class ControllerSettings extends AppCompatActivity {
         port = (EditText) findViewById(R.id.port);
         connect = (Button) findViewById(R.id.connect);
         connect.setOnClickListener(buttonConnectOnClickListener);
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
 
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    client.sendCommands("driveAuto");
+                } else {
+                    client.sendCommands("stopAuto");
+                }
+            }
+        });
     }
 
 
@@ -36,7 +51,7 @@ public class ControllerSettings extends AppCompatActivity {
             String ip = ipAdress.getText().toString();
             int lastPort = Integer.parseInt(port.getText().toString());
             Log.i(TAG, "Clicking on connect");
-            MainActivity.client.connect(ip, lastPort);
+            client.connect(ip, lastPort);
            // main.playStream(ip);
         }
 

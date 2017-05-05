@@ -4,4 +4,7 @@
     <string name="ip">192.168.42.1</string>
     <string name="port">8080</string>
     <string name="sensor">Sensor</string>
+    <string name="settings">Settings</string>
+    <string name="video">Video</string>
+    <string name="sensorView">00</string>
 </resources>

@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import com.fazecast.jSerialComm.*;
 import arduino.*;
 
-class host2test {
+class host {
 	static Arduino arduino = null;
 	public static void main(String args[]) {
 

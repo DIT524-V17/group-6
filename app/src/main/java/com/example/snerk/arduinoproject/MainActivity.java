@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         video = (VideoView) findViewById(R.id.videoView);
-        mediaController.setVisibility(View.GONE);
+        //mediaController.setVisibility(View.GONE);
 
 
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(TAG, "Reading sensor in new thread");
 
 
-                        client.sendCommands("sensorRead:\n");
+                        //client.sendCommands("sensorRead:\n");
                         client.readSensor();
                         Thread.sleep(500);
                         Log.i(TAG, client.distance);

@@ -4,59 +4,89 @@ import java.net.Socket;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.fazecast.jSerialComm.*;
+import arduino.*;
 
-class host
-{
-    public static void main(String srgs[])
-    {
+class host2test {
+	static Arduino arduino = null;
+	public static void main(String args[]) {
 
-        ServerSocket serverSocket = null;
-        Socket socket = null;
-        BufferedReader bufferedReader = null;
-        PrintStream printStream = null;
+		ServerSocket serverSocket = null;
+		Socket socket = null;
 
-        try{
-            serverSocket = new ServerSocket(0);
-            System.out.println("I'm waiting here: "
-                    + serverSocket.getLocalPort());
+		BufferedReader bufferedReader = null;
+		PrintStream printStream = null;
+		//Arduino arduino = null;
+		PrintWriter printWriter = null;
+		SerialPort serialPort = SerialPort.getCommPort("/dev/ttyACM0");
+		try {
+			serverSocket = new ServerSocket(1337);
 
-            socket = serverSocket.accept();
-            System.out.println("from " +
-                    socket.getInetAddress() + ":" + socket.getPort());
+			System.out.println(serverSocket.getInetAddress() + ", " + serverSocket.toString());
+			System.out.println("I'm waiting here: " + serverSocket.getLocalPort());
 
-            InputStreamReader inputStreamReader =
-                    new InputStreamReader(socket.getInputStream());
-            bufferedReader = new BufferedReader(inputStreamReader);
+			socket = serverSocket.accept();
+			System.out.println("from " + socket.getInetAddress() + ":" + socket.getPort());
 
-            String line;
-            while((line=bufferedReader.readLine()) != null){
-                System.out.println(line);
-            }
-        }catch(IOException e){
-            System.out.println(e.toString());
-        }finally{
-            if(bufferedReader!=null){
-                try {
-                    bufferedReader.close();
-                } catch (IOException ex) {
-                    System.out.print(ex.toString());
-                }
-            }
+			InputStreamReader inputStreamReader = new InputStreamReader(socket.getInputStream());
+			bufferedReader = new BufferedReader(inputStreamReader);
 
-            if(printStream!=null){
-                printStream.close();
-            }
+			OutputStream outputStream = socket.getOutputStream();
+			printWriter = new PrintWriter(outputStream, true);
 
-            if(socket!=null){
-                try {
-                    socket.close();
-                } catch (IOException ex) {
-                    System.out.print(ex.toString());
-                }
-            }
-        }
-    }
+			arduino = new Arduino("/dev/ttyACM0", 9600);
+			arduino.openConnection();
+			
+			Thread t1 = new Thread(new Runnable() {
+				public void run() {
+					PrintWriter printWriter = new PrintWriter(outputStream, true);
+					String serialRead;
+					while (true) {
+						serialRead = arduino.serialRead(1);
+						printWriter.println(serialRead);
+						System.out.println(serialRead);
+						try{
+							Thread.sleep(100);
+						}catch (InterruptedException e) {
+							System.out.print(e.toString());
+						}
+					}
+				}
+			});
+			t1.start();
+			
+			String serialRead;
+			while (bufferedReader != null) {
+				String command = bufferedReader.readLine();
+				System.out.println(command);
+				arduino.serialWrite(command);
+			}
+		} catch (IOException e) {
+			System.out.println(e.toString());
+		} finally {
+			if (bufferedReader != null) {
+				try {
+					bufferedReader.close();
+				} catch (IOException ex) {
+					System.out.print(ex.toString());
+				}
+			}
+
+			if (printStream != null) {
+				printStream.close();
+			}
+
+			if (socket != null) {
+				try {
+					socket.close();
+				} catch (IOException ex) {
+					System.out.print(ex.toString());
+				}
+			}
+		}
+	}
 }

@@ -1,6 +1,6 @@
 package com.example.snerk.arduinoproject;
 
-import android.graphics.Color;
+
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -11,7 +11,6 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
 
 public class Client {
 
@@ -89,7 +88,13 @@ public class Client {
 
     // Sending commands to the Arduino via the PI
     public void sendCommands(String command) {
-        printStream.print(command);
+        try {
+            printStream.print(command);
+        }
+        catch (Exception e){
+
+        }
+
 
     }
 

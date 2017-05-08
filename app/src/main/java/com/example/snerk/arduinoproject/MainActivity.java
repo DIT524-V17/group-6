@@ -21,7 +21,9 @@ import android.os.Message;
 
 
 public class MainActivity extends AppCompatActivity {
+
     static String TAG = "MainActivity";
+    public static boolean connected = false;
     public static Client client = new Client();
     private int backgroundColorVariator;
     Handler distanceHandler = new Handler();
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     TextView distance;
     MediaController mediaController;
     VideoView video;
+
 
     Handler handler = new Handler(){
 
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     };
     // Creating the instance and finding the diffrent buttons and texts from the XML File
     protected void onCreate(Bundle savedInstanceState) {
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         video = (VideoView) findViewById(R.id.videoView);
+        mediaController.setVisibility(View.GONE);
 
 
 

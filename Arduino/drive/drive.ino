@@ -2,8 +2,6 @@
 #include <Smartcar.h>   //SmarCar library
 #include <Servo.h>
 
-char ssid[] = "SWAT";      // your network SSID (name)
-char pass[] = "raspberry";   // your network password
 
 Gyroscope gyro;
 Car car;
@@ -39,25 +37,14 @@ void setup() {
 void move () {
 
   Serial.readBytes(inputBuffer, Serial.available());      // reads characters from the serial port into a buffer
-  // delay(5000);
-  // Serial.print("I got this ->");
-  // Serial.print(inputBuffer);
-  // Serial.println("<-");
-  // Serial.write(c);
   String currentline = Serial.readStringUntil(':');
 
   if (currentline.startsWith("forward")) {                                      // move the car forward
+   
     car.setAngle(0);
-    //car.setSpeed(50);
-
-    for ( speedSet >= 0; speedSet < MAX_SPEED ; speedSet += 5 ) {               //increase the speedof the car
-
-      car.setSpeed(speedSet);
-      delay(100);
-
-    }
-
+    car.setSpeed(50);
   }
+
   if (currentline.startsWith("turnLeft")) {           // GET the car to turn left
 
     car.setSpeed(50);
@@ -87,7 +74,6 @@ void move () {
 }
 void loop() {
 
-  //put your main code here, to run repeatedly:
 
   move();
 
@@ -103,33 +89,12 @@ void loop() {
  
   }
 
-
   else if (car.getSpeed() < 0)  {                                       // get measurements form the back sensor when the car is moving backward.
 
     String BackDistance = String (backDistance);
     Serial.println(BackDistance + "\n");   
 
   }
-  /*
-    while (true) {
-
-      if (angle < 45) {
-        angle += 5;
-        servo_test.write(angle);
-
-      }
-      else if (angle >= 45)  {
-        angle -= 5;
-        servo_test.write(angle);
-      }
-      else if (angle <= -30 )  {
-
-         angle+=5;
-        servo_test.write(angle);
-      }
-
-    }*/
-
   unsigned long CurrentTime = millis();
 
   if (CurrentTime - previousMillis > 100 ) {                    //set the range of the angle of the servo motors

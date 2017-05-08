@@ -37,10 +37,11 @@ public class ControllerSettings extends AppCompatActivity {
                 if (isChecked) {
 
                     Log.i(TAG, "driveAuto:");
-                    client.sendCommands("driveAuto");
+
+                    client.sendCommands("driveAuto:");
                 } else {
                     Log.i(TAG, "stopAuto:");
-                    client.sendCommands("stopAuto");
+                    client.sendCommands("stopAuto:");
                 }
             }
         });
@@ -57,11 +58,9 @@ public class ControllerSettings extends AppCompatActivity {
             client.connect(ip, lastPort);
            // main.playStream(ip);
         }
-
-
     };
 
-    //Takes you Back
+    //Takes you back to the Main Activity
     public void Back(View view) {
 
         startActivity(new Intent(getApplicationContext(), MainActivity.class));

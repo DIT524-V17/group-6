@@ -127,11 +127,13 @@ int lookLeft()
 {
   Serial.println("lookLeft \n");  
   int obstacle = 400;
-  for (angle = 70 ; angle >= 100; angle += 10) // command to move from 180 degrees to 0 degrees
+  for (angle = 70 ; angle <= 100; angle += 10) // command to move from 180 degrees to 0 degrees
   {
+      Serial.println("In the FORLEFT and ANGLE IS " + (String) angle + "\n");   
     servo_test.write(angle);              //command to rotate the servo to the specified angle
     int distance = Sensor.getDistance();
-    if (distance < obstacle  ) {
+    if (distance < obstacle && distance != 0 ) {
+      Serial.println("In the IFLEFT \n");  
       obstacle = distance;
     }
   }
@@ -143,15 +145,18 @@ int lookRight()
 {
    Serial.println("lookRight \n");  
   int obstacle = 400;
-  for (angle = 70 ; angle <= 20; angle -= 10) // command to move from 180 degrees to 0 degrees
+  for (angle = 70 ; angle >= 20; angle -= 10) // command to move from 180 degrees to 0 degrees
   {
+     Serial.println("In the FORRIGHT and ANGLE IS " + (String) angle + "\n");  
     servo_test.write(angle);              //command to rotate the servo to the specified angle
     int distance = Sensor.getDistance();
-    if (distance < obstacle  ) {
-      obstacle = distance;
+    if (distance < obstacle && distance != 0) {
+       Serial.println("In the IFRIGHT \n");  
+      obstacle = Sensor.getDistance();
     }
   }
   servo_test.write(70);
+  Serial.println("The OBSTACLE IS" + (String) obstacle + "\n");
   return obstacle;
 }
 
@@ -166,7 +171,7 @@ void autoDrive()
     Serial.readBytes(inputBuffer, Serial.available());   
     // put your main code here, to run repeatedly:
   unsigned int distance = Sensor.getDistance();
-   Serial.println(Sensor.getDistance() + "\n");
+   Serial.println((String) Sensor.getDistance() + "\n");
 
   if (Sensor.getDistance() <= 20) {
     Serial.println("autoDrive too Small distance "); 

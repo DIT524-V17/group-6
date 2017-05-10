@@ -176,6 +176,13 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "initialize sensor");
         client.sensorReader();
 
+       
+        startVideo();
+        Log.i(TAG, "Starting new threading");
+        t.start();
+    }
+
+    public void startVideo(){
         Log.i(TAG, "Starting The Videofeed");
         Uri UriSrc = Uri.parse("http://192.168.42.1:8090");
         if (UriSrc == null) {
@@ -191,11 +198,7 @@ public class MainActivity extends AppCompatActivity {
                     "Connect: " + "http://192.168.42.1:8090",
                     Toast.LENGTH_LONG).show();
         }
-
-        Log.i(TAG, "Starting new threading");
-        t.start();
     }
-
     // Takes you to the Settings View
     public void Settings(View view) {
 

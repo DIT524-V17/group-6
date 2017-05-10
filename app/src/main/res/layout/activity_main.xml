@@ -10,15 +10,10 @@
     <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
     <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
     <!--android:paddingTop="@dimen/activity_vertical_margin"-->
-
-
-
-
- <VideoView
+    <VideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
     <RelativeLayout
         android:id="@+id/linear"
@@ -29,29 +24,29 @@
             android:id="@+id/driveForward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/up"
+            android:layout_above="@+id/driveBackward"
             android:layout_alignLeft="@+id/driveBackward"
             android:layout_alignStart="@+id/driveBackward"
-            android:layout_below="@+id/button2"
-            android:layout_marginTop="22dp"
-            app:srcCompat="@mipmap/up" />
+            android:layout_marginBottom="15dp" />
 
         <ImageButton
             android:id="@+id/turnLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/driveBackward"
-            android:layout_marginBottom="21dp"
-            android:layout_toLeftOf="@+id/turnRight"
-            android:layout_toStartOf="@+id/turnRight"
-            app:srcCompat="@mipmap/left" />
+            app:srcCompat="@mipmap/left"
+            android:layout_alignTop="@+id/turnRight"
+            android:layout_toLeftOf="@+id/button"
+            android:layout_toStartOf="@+id/button" />
 
         <Button
             android:id="@+id/settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/button"
             android:layout_alignEnd="@+id/button"
+            android:layout_alignParentTop="true"
             android:layout_alignRight="@+id/button"
+            android:layout_marginTop="18dp"
             android:elevation="0dp"
             android:onClick="Settings"
             android:text="Settings" />
@@ -60,69 +55,49 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/sensor"
-            android:layout_alignEnd="@+id/sensor"
-            android:layout_alignRight="@+id/sensor"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/settings"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
             android:onClick="autoConnect"
             android:text="Connect" />
-
 
         <ImageButton
             android:id="@+id/driveBackward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            app:srcCompat="@mipmap/down"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/driveForward"
-            android:layout_marginLeft="48dp"
-            android:layout_marginStart="48dp"
-            app:srcCompat="@mipmap/down" />
+            android:layout_marginBottom="26dp" />
 
         <ImageButton
             android:id="@+id/turnRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button2"
-            android:layout_alignStart="@+id/button2"
-            android:layout_alignTop="@+id/turnLeft"
             android:scaleType="fitCenter"
-            app:srcCompat="@mipmap/right" />
+            app:srcCompat="@mipmap/right"
+            android:layout_alignBottom="@+id/driveBackward"
+            android:layout_alignRight="@+id/button"
+            android:layout_alignEnd="@+id/button"
+            android:layout_marginBottom="20dp" />
 
         <TextView
             android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/sensor"
             android:layout_alignLeft="@+id/driveForward"
             android:layout_alignStart="@+id/driveForward"
             android:layout_marginBottom="26dp"
             android:width="68dp"
             android:text="@string/sensorView"
             android:textColor="#000000"
-            android:textSize="36sp" />
-
-        <Button
-            android:id="@+id/sensor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/button2"
-            android:layout_alignLeft="@+id/button2"
-            android:layout_alignStart="@+id/button2"
-            android:onClick="startMeasure"
-            android:text="@string/sensor" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
-            android:onClick="startVideo"
-            android:text="@string/video" />
+            android:textSize="36sp" /><![CDATA[
         />
-
+    ]]>
     </RelativeLayout>
 </FrameLayout>

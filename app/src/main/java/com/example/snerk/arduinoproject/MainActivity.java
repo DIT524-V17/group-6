@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         //mediaController.setVisibility(View.GONE);
 
 
-
         // Creates a new running thread that updates every second
         Runnable R = new Runnable() {
             @Override
@@ -177,13 +176,6 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "initialize sensor");
         client.sensorReader();
 
-
-    }
-
-
-    //The method for displaying the video feed
-    public void startVideo(View View) {
-
         Log.i(TAG, "Starting The Videofeed");
         Uri UriSrc = Uri.parse("http://192.168.42.1:8090");
         if (UriSrc == null) {
@@ -199,13 +191,9 @@ public class MainActivity extends AppCompatActivity {
                     "Connect: " + "http://192.168.42.1:8090",
                     Toast.LENGTH_LONG).show();
         }
-    }
-    // Starts reading from the sensors by initializing a new thread.
-    public void startMeasure (View view) {
+
         Log.i(TAG, "Starting new threading");
         t.start();
-
-
     }
 
     // Takes you to the Settings View
@@ -225,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else if (20 > distanceInt) {
-                distance.setBackgroundColor(Color.RED);
+            distance.setBackgroundColor(Color.RED);
 
         }
     }

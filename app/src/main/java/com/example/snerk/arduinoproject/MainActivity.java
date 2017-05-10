@@ -175,9 +175,7 @@ public class MainActivity extends AppCompatActivity {
         client.autoConnect();
         Log.i(TAG, "initialize sensor");
         client.sensorReader();
-
-       
-        startVideo();
+        startVideo(); 
         Log.i(TAG, "Starting new threading");
         t.start();
     }

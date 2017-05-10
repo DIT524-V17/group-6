@@ -22,22 +22,48 @@
 
         <ImageButton
             android:id="@+id/driveForward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/up"
-            android:layout_above="@+id/driveBackward"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="28dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/forward"
+            android:layout_alignBottom="@+id/turnLeft"
             android:layout_alignLeft="@+id/driveBackward"
-            android:layout_alignStart="@+id/driveBackward"
-            android:layout_marginBottom="15dp" />
+            android:layout_alignStart="@+id/driveBackward" />
+
+        <ImageButton
+            android:id="@+id/tankRight"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/tankright"
+            android:layout_below="@+id/rightdistance"
+            android:layout_toRightOf="@+id/tankLeft"
+            android:layout_toEndOf="@+id/tankLeft" />
+
+        <ImageButton
+            android:id="@+id/tankLeft"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/tankleft"
+            android:layout_below="@+id/rightdistance"
+            android:layout_alignLeft="@+id/rightdistance"
+            android:layout_alignStart="@+id/rightdistance"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
 
         <ImageButton
             android:id="@+id/turnLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/left"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignEnd="@+id/turnRight"
+            android:layout_alignRight="@+id/turnRight"
             android:layout_alignTop="@+id/turnRight"
-            android:layout_toLeftOf="@+id/button"
-            android:layout_toStartOf="@+id/button" />
+            android:layout_marginEnd="52dp"
+            android:layout_marginRight="52dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/left" />
 
         <Button
             android:id="@+id/settings"
@@ -65,26 +91,50 @@
 
         <ImageButton
             android:id="@+id/driveBackward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="22dp"
-            android:layout_marginStart="22dp"
-            app:srcCompat="@mipmap/down"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="26dp" />
+            android:layout_marginBottom="26dp"
+            android:layout_marginLeft="22dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/backward" />
 
         <ImageButton
             android:id="@+id/turnRight"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignBottom="@+id/driveBackward"
+            android:layout_alignEnd="@+id/button"
+            android:layout_alignRight="@+id/button"
+            android:layout_marginBottom="20dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/right" />
+
+        <TextView
+            android:id="@+id/frontdistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-            app:srcCompat="@mipmap/right"
-            android:layout_alignBottom="@+id/driveBackward"
-            android:layout_alignRight="@+id/button"
-            android:layout_alignEnd="@+id/button"
-            android:layout_marginBottom="20dp" />
+            android:layout_alignBaseline="@+id/distance"
+            android:layout_marginLeft="48dp"
+            android:layout_marginStart="48dp"
+            android:layout_toRightOf="@+id/distance"
+            android:width="68dp"
+            android:gravity="center_vertical|right"
+            android:text="00"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/rightdistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="48dp"
+            android:layout_marginStart="48dp"
+            android:layout_toRightOf="@+id/frontdistance"
+            android:width="68dp"
+            android:text="00"
+            android:textSize="36sp" />
 
         <TextView
             android:id="@+id/distance"
@@ -96,8 +146,7 @@
             android:width="68dp"
             android:text="@string/sensorView"
             android:textColor="#000000"
-            android:textSize="36sp" /><![CDATA[
+            android:textSize="36sp" />
         />
-    ]]>
     </RelativeLayout>
 </FrameLayout>

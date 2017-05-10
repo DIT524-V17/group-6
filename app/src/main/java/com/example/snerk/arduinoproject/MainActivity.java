@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private int backgroundColorVariator;
     Handler distanceHandler = new Handler();
     Thread t;
+    TextView rightDistance;
+    TextView frontDistance;
     TextView distance;
     MediaController mediaController;
     VideoView video;
@@ -38,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             distance = (TextView) findViewById(R.id.distance);
             distance.setText(client.distance);
+            frontDistance = (TextView) findViewById(R.id.frontdistance);
+            frontDistance.setText(client.distance);
+            rightDistance = (TextView) findViewById(R.id.rightdistance);
+            rightDistance.setText(client.distance);
+
         }
     };
     // Creating the instance and finding the diffrent buttons and texts from the XML File
@@ -52,8 +59,18 @@ public class MainActivity extends AppCompatActivity {
         ImageButton turnLeft = (ImageButton) (findViewById(R.id.turnLeft));
         ImageButton forward = (ImageButton) (findViewById(R.id.driveForward));
         ImageButton backwards = (ImageButton) (findViewById(R.id.driveBackward));
+        ImageButton tankLeft = (ImageButton) (findViewById(R.id.tankLeft));
+        ImageButton tankRight = (ImageButton) (findViewById(R.id.tankRight));
+        turnRight.setBackgroundResource(0);
+        turnLeft.setBackgroundResource(0);
+        forward.setBackgroundResource(0);
+        backwards.setBackgroundResource(0);
+        tankLeft.setBackgroundResource(0);
+        tankRight.setBackgroundResource(0);
 
         distance = (TextView) findViewById(R.id.distance);
+        frontDistance = (TextView) findViewById(R.id.frontdistance);
+        rightDistance = (TextView) findViewById(R.id.rightdistance);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -76,16 +93,36 @@ public class MainActivity extends AppCompatActivity {
 
                         //client.sendCommands("sensorRead:\n");
                         client.readSensor();
-                        Thread.sleep(500);
+                        Thread.sleep(50);
                         Log.i(TAG, client.distance);
                         runOnUiThread(new Runnable() {
                             public void run(){
                                 try {
                                     if (!client.distance.isEmpty()) {
+                                        if (client.distance.startsWith("center")) {
+                                            String obstacle= client.distance.substring(client.distance.indexOf(':') + 1);
+                                            Log.i(TAG, obstacle);
+                                            frontDistance.setText(obstacle);
+                                            setBackgroundColor(Integer.parseInt(obstacle), frontDistance);
+                                            frontDistance.invalidate();
+                                            Log.i(TAG, "obstacle on the front detected ");
 
-                                        distance.setText(client.distance);
-                                        setBackgroundColor(Integer.parseInt(client.distance));
-                                        distance.invalidate();
+                                        } else if (client.distance.startsWith("right")) {
+                                            String obstacle= client.distance.substring(client.distance.indexOf(':') + 1);
+                                            Log.i(TAG, obstacle);
+                                            rightDistance.setText(obstacle);
+                                            setBackgroundColor(Integer.parseInt(obstacle), rightDistance);
+                                            rightDistance.invalidate();
+                                            Log.i(TAG, "obstacle on the right detected ");
+
+                                        } else if (client.distance.startsWith("left")) {
+                                            String obstacle= client.distance.substring(client.distance.indexOf(':') + 1);
+                                            Log.i(TAG, obstacle);
+                                            distance.setText(obstacle);
+                                            setBackgroundColor(Integer.parseInt(obstacle), distance);
+                                            distance.invalidate();
+                                            Log.i(TAG, "obstacle on the left detected ");
+                                        }
                                     }
                                 }catch(Exception e){
                                     Log.i(TAG, e.toString());
@@ -204,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void setBackgroundColor(int distanceInt){
+    public void setBackgroundColor(int distanceInt, TextView view){
         if (distanceInt > 50){
             distance.setBackgroundColor(Color.GREEN);
         }

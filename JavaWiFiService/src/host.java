@@ -37,6 +37,8 @@ class host {
 
 			OutputStream outputStream = socket.getOutputStream();
 			printWriter = new PrintWriter(outputStream, true);
+			
+			printWriter.println("Connected");
 
 			arduino = new Arduino("/dev/ttyACM0", 9600);
 			arduino.openConnection();

@@ -10,6 +10,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ToggleButton;
 
+import java.util.prefs.AbstractPreferences;
+
+import static com.example.snerk.arduinoproject.Client.onOff;
 import static com.example.snerk.arduinoproject.MainActivity.client;
 
 public class ControllerSettings extends AppCompatActivity {
@@ -17,7 +20,6 @@ public class ControllerSettings extends AppCompatActivity {
     Button connect;
     MainActivity main;
     ToggleButton toggleButton;
-
     private static final String TAG = "ControllerSettings";
 
     //Finds the various buttons in the XML-file
@@ -31,6 +33,7 @@ public class ControllerSettings extends AppCompatActivity {
         connect = (Button) findViewById(R.id.connect);
         connect.setOnClickListener(buttonConnectOnClickListener);
         ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
+        toggle.setChecked(client.onOff);
 
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -39,9 +42,12 @@ public class ControllerSettings extends AppCompatActivity {
                     Log.i(TAG, "driveAuto:");
 
                     client.sendCommands("driveAuto:");
+                    client.onOff = true;
                 } else {
                     Log.i(TAG, "stopAuto:");
                     client.sendCommands("stopAuto:");
+                    client.onOff = false;
+
                 }
             }
         });

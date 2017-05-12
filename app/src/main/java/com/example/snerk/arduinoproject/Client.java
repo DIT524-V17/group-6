@@ -35,6 +35,7 @@ public class Client {
         this.toast = toast;
     }
 
+    public static boolean onOff;
     //Connecting to the RaspberryPI-server
     public void connect(String ipAdress, int port) {
         try {

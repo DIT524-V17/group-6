@@ -81,7 +81,7 @@ public class Client {
             Log.i(TAG, "done with sensors");
             //setBackgroundColor(Integer.parseInt(distance));
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

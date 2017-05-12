@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private int backgroundColorVariator;
     Handler distanceHandler = new Handler();
     Thread t;
-    TextView rightDistance;
-    TextView frontDistance;
     TextView distance;
     MediaController mediaController;
     VideoView video;
@@ -40,11 +38,6 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             distance = (TextView) findViewById(R.id.distance);
             distance.setText(client.distance);
-            frontDistance = (TextView) findViewById(R.id.frontdistance);
-            frontDistance.setText(client.distance);
-            rightDistance = (TextView) findViewById(R.id.rightdistance);
-            rightDistance.setText(client.distance);
-
         }
     };
     // Creating the instance and finding the diffrent buttons and texts from the XML File
@@ -69,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
         tankRight.setBackgroundResource(0);
 
         distance = (TextView) findViewById(R.id.distance);
-        frontDistance = (TextView) findViewById(R.id.frontdistance);
-        rightDistance = (TextView) findViewById(R.id.rightdistance);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -99,30 +90,9 @@ public class MainActivity extends AppCompatActivity {
                             public void run(){
                                 try {
                                     if (!client.distance.isEmpty()) {
-                                        if (client.distance.startsWith("center")) {
-                                            String obstacle= client.distance.substring(client.distance.indexOf(':') + 1);
-                                            Log.i(TAG, obstacle);
-                                            frontDistance.setText(obstacle);
-                                            setBackgroundColor(Integer.parseInt(obstacle), frontDistance);
-                                            frontDistance.invalidate();
-                                            Log.i(TAG, "obstacle on the front detected ");
-
-                                        } else if (client.distance.startsWith("right")) {
-                                            String obstacle= client.distance.substring(client.distance.indexOf(':') + 1);
-                                            Log.i(TAG, obstacle);
-                                            rightDistance.setText(obstacle);
-                                            setBackgroundColor(Integer.parseInt(obstacle), rightDistance);
-                                            rightDistance.invalidate();
-                                            Log.i(TAG, "obstacle on the right detected ");
-
-                                        } else if (client.distance.startsWith("left")) {
-                                            String obstacle= client.distance.substring(client.distance.indexOf(':') + 1);
-                                            Log.i(TAG, obstacle);
-                                            distance.setText(obstacle);
-                                            setBackgroundColor(Integer.parseInt(obstacle), distance);
-                                            distance.invalidate();
-                                            Log.i(TAG, "obstacle on the left detected ");
-                                        }
+                                        distance.setText(client.distance);
+                                        setBackgroundColor(Integer.parseInt(client.distance));
+                                        distance.invalidate();
                                     }
                                 }catch(Exception e){
                                     Log.i(TAG, e.toString());
@@ -152,6 +122,20 @@ public class MainActivity extends AppCompatActivity {
                 if (action == MotionEvent.ACTION_DOWN) {
                     Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
                     client.sendCommands("forward:\n");
+                } else if (action == MotionEvent.ACTION_UP) {
+                    Log.i("repeatBtn", "MotionEvent.ACTION_UP");
+                    client.sendCommands("stop:\n");
+                }
+                return false;
+            }
+        });
+        backwards.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionevent) {
+                int action = motionevent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
+                    client.sendCommands("backwards:\n");
                 } else if (action == MotionEvent.ACTION_UP) {
                     Log.i("repeatBtn", "MotionEvent.ACTION_UP");
                     client.sendCommands("stop:\n");
@@ -190,16 +174,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        backwards.setOnTouchListener(new View.OnTouchListener() {
+        tankLeft.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionevent) {
                 int action = motionevent.getAction();
                 if (action == MotionEvent.ACTION_DOWN) {
                     Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
-                    client.sendCommands("backwards:\n");
-                } else if (action == MotionEvent.ACTION_UP) {
-                    Log.i("repeatBtn", "MotionEvent.ACTION_UP");
-                    client.sendCommands("stop:\n");
+                    client.sendCommands("tankLeft:\n");
+                }
+                return false;
+            }
+        });
+        tankRight.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionevent) {
+                int action = motionevent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    Log.i("repeatBtn", "MotionEvent.ACTION_DOWN");
+                    client.sendCommands("tankRight:\n");
                 }
                 return false;
             }
@@ -241,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void setBackgroundColor(int distanceInt, TextView view){
+    public void setBackgroundColor(int distanceInt){
         if (distanceInt > 50){
             distance.setBackgroundColor(Color.GREEN);
         }

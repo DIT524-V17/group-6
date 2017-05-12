@@ -37,9 +37,9 @@
             android:layout_height="42dp"
             android:scaleType="centerCrop"
             app:srcCompat="@mipmap/tankright"
-            android:layout_below="@+id/rightdistance"
-            android:layout_toRightOf="@+id/tankLeft"
-            android:layout_toEndOf="@+id/tankLeft" />
+            android:layout_alignTop="@+id/tankLeft"
+            android:layout_alignLeft="@+id/turnRight"
+            android:layout_alignStart="@+id/turnRight" />
 
         <ImageButton
             android:id="@+id/tankLeft"
@@ -47,11 +47,10 @@
             android:layout_height="42dp"
             android:scaleType="centerCrop"
             app:srcCompat="@mipmap/tankleft"
-            android:layout_below="@+id/rightdistance"
-            android:layout_alignLeft="@+id/rightdistance"
-            android:layout_alignStart="@+id/rightdistance"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp" />
+            android:layout_marginBottom="16dp"
+            android:layout_above="@+id/turnLeft"
+            android:layout_alignRight="@+id/turnLeft"
+            android:layout_alignEnd="@+id/turnLeft" />
 
         <ImageButton
             android:id="@+id/turnLeft"
@@ -69,25 +68,23 @@
             android:id="@+id/settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/button"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/button"
-            android:layout_marginTop="18dp"
             android:elevation="0dp"
             android:onClick="Settings"
-            android:text="Settings" />
+            android:text="Settings"
+            android:layout_alignBaseline="@+id/distance"
+            android:layout_alignBottom="@+id/distance"
+            android:layout_alignLeft="@+id/tankLeft"
+            android:layout_alignStart="@+id/tankLeft" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/settings"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
             android:onClick="autoConnect"
-            android:text="Connect" />
+            android:text="Connect"
+            android:layout_below="@+id/settings"
+            android:layout_alignRight="@+id/settings"
+            android:layout_alignEnd="@+id/settings" />
 
         <ImageButton
             android:id="@+id/driveBackward"
@@ -105,36 +102,12 @@
             android:id="@+id/turnRight"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_alignBottom="@+id/driveBackward"
-            android:layout_alignEnd="@+id/button"
-            android:layout_alignRight="@+id/button"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="18dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@mipmap/right" />
-
-        <TextView
-            android:id="@+id/frontdistance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/distance"
-            android:layout_marginLeft="48dp"
-            android:layout_marginStart="48dp"
-            android:layout_toRightOf="@+id/distance"
-            android:width="68dp"
-            android:gravity="center_vertical|right"
-            android:text="00"
-            android:textSize="36sp" />
-
-        <TextView
-            android:id="@+id/rightdistance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="48dp"
-            android:layout_marginStart="48dp"
-            android:layout_toRightOf="@+id/frontdistance"
-            android:width="68dp"
-            android:text="00"
-            android:textSize="36sp" />
+            app:srcCompat="@mipmap/right"
+            android:layout_alignBottom="@+id/driveBackward"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:id="@+id/distance"

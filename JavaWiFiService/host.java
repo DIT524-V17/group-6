@@ -49,6 +49,8 @@ class host {
 			OutputStream outputStream = socket.getOutputStream();
 			printWriter = new PrintWriter(outputStream, true);
 
+			printWriter.println("Connected");
+			
 			// Creating an Arduino connection with Baudrate 9600
 			arduino = new Arduino("/dev/ttyACM0", 9600);
 			arduino.openConnection();

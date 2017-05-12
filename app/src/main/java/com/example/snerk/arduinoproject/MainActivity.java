@@ -20,6 +20,8 @@ import android.os.Handler;
 import android.widget.Toast;
 import android.os.Message;
 
+import static com.example.snerk.arduinoproject.Client.videoState;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -205,6 +207,9 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        
+        if(videoState){ startVideo();}
+
     }
 
     // The button that connects you automatically to the predefined IP/Port. Intalizes the sensorReader
@@ -214,7 +219,8 @@ public class MainActivity extends AppCompatActivity {
         toast.makeText(this, "Connected to command server", Toast.LENGTH_LONG);
         Log.i(TAG, "initialize sensor");
         client.sensorReader();
-        startVideo(); 
+        startVideo();
+        videoState = true;
         Log.i(TAG, "Starting new threading");
         t.start();
     }

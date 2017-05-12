@@ -27,6 +27,8 @@ public class Client {
     private InputStreamReader inputStreamReader;
     private static final String TAG = "Client";
     public static String distance;
+    public static boolean videoState;
+
     Toast toast;
 
 

@@ -69,7 +69,9 @@ public class ControllerSettings extends AppCompatActivity {
     //Takes you back to the Main Activity
     public void Back(View view) {
 
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        Intent openMainActivity= new Intent(this, MainActivity.class);
+        openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(openMainActivity, 0);
 
     }
 

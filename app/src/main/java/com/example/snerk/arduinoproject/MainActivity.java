@@ -90,9 +90,17 @@ public class MainActivity extends AppCompatActivity {
                             public void run(){
                                 try {
                                     if (!client.distance.isEmpty()) {
+                                        
+                                        if(client.distance.startsWith("Connected")){
+                                            Toast.makeText(MainActivity.this, client.distance,
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+
+                                        else {
                                         distance.setText(client.distance);
                                         setBackgroundColor(Integer.parseInt(client.distance));
                                         distance.invalidate();
+                                        }
                                     }
                                 }catch(Exception e){
                                     Log.i(TAG, e.toString());

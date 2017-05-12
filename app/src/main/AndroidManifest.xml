@@ -21,7 +21,12 @@
 
         <activity android:name=".ControllerSettings"
             android:screenOrientation="landscape"
+
             ></activity>
     </application>
-
+    <activity
+        android:name=".SingleInstanceActivity"
+        android:label="singleInstance launchMode"
+        android:launchMode="singleInstance"
+        android:taskAffinity=""></activity>
 </manifest>

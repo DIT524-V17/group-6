@@ -25,7 +25,7 @@ public class Client {
     private InputStreamReader inputStreamReader;
     private static final String TAG = "Client";
     public static String distance;
-
+    public static boolean onOff;
     //Connecting to the RaspberryPI-server
     public void connect(String ipAdress, int port) {
         try {

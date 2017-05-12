@@ -11,6 +11,8 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import android.widget.Toast;
+
 
 public class Client {
 
@@ -25,6 +27,13 @@ public class Client {
     private InputStreamReader inputStreamReader;
     private static final String TAG = "Client";
     public static String distance;
+    Toast toast;
+
+
+    Client(Toast toast)
+    {
+        this.toast = toast;
+    }
 
     //Connecting to the RaspberryPI-server
     public void connect(String ipAdress, int port) {
@@ -40,9 +49,13 @@ public class Client {
             Log.i(TAG, "done connecting");
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
+            toast.setText(e.toString());
+            toast.show();
             Log.i(TAG, e.toString());
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            toast.setText(e.toString());
+            toast.show();
             Log.i(TAG, e.toString());
         }
     }

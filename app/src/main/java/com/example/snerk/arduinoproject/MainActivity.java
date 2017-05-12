@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     static String TAG = "MainActivity";
     public static boolean connected = false;
-    public static Client client = new Client();
+    static Toast toast;
+    public static Client client = new Client(toast);
     private int backgroundColorVariator;
     Handler distanceHandler = new Handler();
     Thread t;
@@ -221,9 +222,7 @@ public class MainActivity extends AppCompatActivity {
             video.setMediaController(mediaController);
             video.start();
 
-            Toast.makeText(MainActivity.this,
-                    "Connect: " + "http://192.168.42.1:8090",
-                    Toast.LENGTH_LONG).show();
+            toast.makeText(this,"Connecting to CVLC on " + UriSrc, Toast.LENGTH_LONG).show();
         }
     }
     // Takes you to the Settings View

@@ -39,14 +39,10 @@ public class Client {
     //Connecting to the RaspberryPI-server
     public void connect(String ipAdress, int port) {
         try {
-
-
             //Opening socket and making sure you can send data
             socket = new Socket(ipAdress, port);
             OutputStream outputStream = socket.getOutputStream();
             this.printStream = new PrintStream(outputStream);
-
-
             Log.i(TAG, "done connecting");
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block

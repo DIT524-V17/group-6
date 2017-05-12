@@ -109,11 +109,8 @@ public class MainActivity extends AppCompatActivity {
                                 }catch(Exception e){
                                     Log.i(TAG, e.toString());
                                 }
-
-
                             }
                         });
-
                     }
                     handler.sendEmptyMessage(0);
                 } catch (InterruptedException e) {
@@ -214,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
     public void autoConnect (View view) {
         Log.i(TAG, "Autoconnect");
         client.autoConnect();
+        toast.makeText(this, "Connected to command server", Toast.LENGTH_LONG);
         Log.i(TAG, "initialize sensor");
         client.sensorReader();
         startVideo(); 
@@ -259,38 +257,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void superFullscreen(){
-
-        // BEGIN_INCLUDE (get_current_ui_flags)
-        // The UI options currently enabled are represented by a bitfield.
-        // getSystemUiVisibility() gives us that bitfield.
         int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
         int newUiOptions = uiOptions;
-        // END_INCLUDE (get_current_ui_flags)
-        // BEGIN_INCLUDE (toggle_ui_flags)
-        boolean isImmersiveModeEnabled =
-                ((uiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE) == uiOptions);
+        boolean isImmersiveModeEnabled = ((uiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE) == uiOptions);
         if (isImmersiveModeEnabled) {
             Log.i(TAG, "Turning immersive mode mode off. ");
         } else {
             Log.i(TAG, "Turning immersive mode mode on.");
         }
-
         // Navigation bar hiding:  Backwards compatible to ICS.
-        if (Build.VERSION.SDK_INT >= 14) {
-            newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        }
-
+        if (Build.VERSION.SDK_INT >= 14) newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         // Status bar hiding: Backwards compatible to Jellybean
-        if (Build.VERSION.SDK_INT >= 16) {
-            newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
-        }
-
-        if (Build.VERSION.SDK_INT >= 18) {
-            newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE;
-        }
-
+        if (Build.VERSION.SDK_INT >= 16) newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        if (Build.VERSION.SDK_INT >= 18) newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE;
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
-        //END_INCLUDE (set_ui_flags)
-
     }
 }

@@ -20,7 +20,7 @@ import android.os.Handler;
 import android.widget.Toast;
 import android.os.Message;
 
-import static com.example.snerk.arduinoproject.Client.connectionState;
+import static com.example.snerk.arduinoproject.Client.videoState;
 
 
 public class MainActivity extends AppCompatActivity {

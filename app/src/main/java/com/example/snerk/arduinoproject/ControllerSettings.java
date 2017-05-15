@@ -41,11 +41,11 @@ public class ControllerSettings extends AppCompatActivity {
 
                     Log.i(TAG, "driveAuto:");
 
-                    client.sendCommands("driveAuto:");
+                    client.sendCommands("driveAuto:\n");
                     client.onOff = true;
                 } else {
                     Log.i(TAG, "stopAuto:");
-                    client.sendCommands("stopAuto:");
+                    client.sendCommands("stopAuto:\n");
                     client.onOff = false;
 
                 }

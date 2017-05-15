@@ -34,6 +34,8 @@ void setup() {
 
 }
 
+void move () {
+
 //the serial is available
   if (Serial.available()){  
       

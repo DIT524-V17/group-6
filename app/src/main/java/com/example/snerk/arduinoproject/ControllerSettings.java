@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ToggleButton;
@@ -21,6 +22,7 @@ public class ControllerSettings extends AppCompatActivity {
     MainActivity main;
     ToggleButton toggleButton;
     private static final String TAG = "ControllerSettings";
+    CheckBox checkBox ;
 
     //Finds the various buttons in the XML-file
     @Override
@@ -73,6 +75,6 @@ public class ControllerSettings extends AppCompatActivity {
 
     }
 
+   }
 
-}
 

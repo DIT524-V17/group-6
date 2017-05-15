@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import android.view.Window;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.net.Uri;
@@ -20,7 +21,7 @@ import android.os.Handler;
 import android.widget.Toast;
 import android.os.Message;
 
-import static com.example.snerk.arduinoproject.Client.connectionState;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     TextView distance;
     MediaController mediaController;
     VideoView video;
+    boolean connectionState = true;
 
 
     Handler handler = new Handler(){
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         backwards.setBackgroundResource(0);
         tankLeft.setBackgroundResource(0);
         tankRight.setBackgroundResource(0);
+
 
         distance = (TextView) findViewById(R.id.distance);
 
@@ -207,6 +210,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
 
         if(connectionState){
             client.sensorReader();

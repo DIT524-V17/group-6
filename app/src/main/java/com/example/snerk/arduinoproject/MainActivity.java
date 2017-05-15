@@ -210,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
 
         if(videoState){
             client.sensorReader();
-            Handler handler = new Handler();
             Message msn = new Message();
             handler.handleMessage(msn);
             t.start();

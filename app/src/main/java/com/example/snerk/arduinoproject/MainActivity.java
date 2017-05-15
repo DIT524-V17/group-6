@@ -21,7 +21,7 @@ import android.os.Handler;
 import android.widget.Toast;
 import android.os.Message;
 
-
+import static com.example.snerk.arduinoproject.Client.videoState;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -212,16 +212,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-        if(connectionState){
+        if(videoState){
             client.sensorReader();
-            Handler handler = new Handler();
             Message msn = new Message();
             handler.handleMessage(msn);
             t.start();
             
         }
-        if(connectionState){ startVideo();}
+        if(videoState){ startVideo();}
 
     }
 
@@ -233,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "initialize sensor");
         client.sensorReader();
         startVideo();
-        connectionState = true;
+        videoState = true;
         Log.i(TAG, "Starting new threading");
         t.start();
     }

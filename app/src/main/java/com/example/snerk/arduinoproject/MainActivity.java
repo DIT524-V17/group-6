@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if(connectionState){
+        if(videoState){
             client.sensorReader();
             Handler handler = new Handler();
             Message msn = new Message();
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
             t.start();
             
         }
-        if(connectionState){ startVideo();}
+        if(videoState){ startVideo();}
 
     }
 
@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "initialize sensor");
         client.sensorReader();
         startVideo();
-        connectionState = true;
+        videoState = true;
         Log.i(TAG, "Starting new threading");
         t.start();
     }

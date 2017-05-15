@@ -20,7 +20,7 @@ import android.os.Handler;
 import android.widget.Toast;
 import android.os.Message;
 
-import static com.example.snerk.arduinoproject.Client.videoState;
+import static com.example.snerk.arduinoproject.Client.connectionState;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -207,8 +207,16 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        
-        if(videoState){ startVideo();}
+
+        if(connectionState){
+            client.sensorReader();
+            Handler handler = new Handler();
+            Message msn = new Message();
+            handler.handleMessage(msn);
+            t.start();
+            
+        }
+        if(connectionState){ startVideo();}
 
     }
 
@@ -220,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "initialize sensor");
         client.sensorReader();
         startVideo();
-        videoState = true;
+        connectionState = true;
         Log.i(TAG, "Starting new threading");
         t.start();
     }

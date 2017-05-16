@@ -213,17 +213,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         if(videoState){
-            client.sensorReader();
-            Message msn = new Message();
-            handler.handleMessage(msn);
-            t.start();
-            
-        }
-        if(videoState){ startVideo();}
+            Log.i(TAG,"UPD sensor readings Färg display");
+            Handler handler = new Handler();
+            Message msg = new Message();
 
+            handler.handleMessage(msg);
+            t.start();
+            startVideo();
+        }
     }
 
-    // The button that connects you automatically to the predefined IP/Port. Intalizes the sensorReader
+    // The button that connects you automatically to the predefined IP/Port. Initializes the sensorReader
     public void autoConnect (View view) {
         Log.i(TAG, "Autoconnect");
         client.autoConnect();
@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
     }
     // Takes you to the Settings View
     public void Settings(View view) {
-
+        distance.invalidate();
         startActivity(new Intent(getApplicationContext(), ControllerSettings.class));
 
     }

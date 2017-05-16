@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ToggleButton;
@@ -21,6 +22,7 @@ public class ControllerSettings extends AppCompatActivity {
     MainActivity main;
     ToggleButton toggleButton;
     private static final String TAG = "ControllerSettings";
+    CheckBox checkBox ;
 
     //Finds the various buttons in the XML-file
     @Override
@@ -34,7 +36,7 @@ public class ControllerSettings extends AppCompatActivity {
         connect.setOnClickListener(buttonConnectOnClickListener);
         ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
         toggle.setChecked(client.onOff);
-
+CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox)
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -49,6 +51,20 @@ public class ControllerSettings extends AppCompatActivity {
                     client.onOff = false;
 
                 }
+            }
+        });
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if (isChecked) {
+
+                    Log.i(TAG, "autostop:");
+
+                    client.sendCommands("autoStop:\n");
+                    client.onOff = true;
+                } 
             }
         });
     }
@@ -73,6 +89,6 @@ public class ControllerSettings extends AppCompatActivity {
 
     }
 
+   }
 
-}
 

@@ -35,46 +35,45 @@ void setup() {
 }
 
 void move () {
-  //the serial is available
-  if (Serial.available() > 0 ) {
 
-    String currentline = Serial.readStringUntil(':'); // reads characters from the serial port into a buffer
+  if (Serial.available() > 0) {
+    String currentline = Serial.readStringUntil(':');     // reads characters from the serial port into a buffer
     //if does not work we can add very short time out serial.setTimeOut (like 5 milliseconds)
 
-    if (currentline.startsWith("forward")) {            // move the car forward
+    if (currentline.startsWith("forward")) {                                      // move the car forward
 
-      car.setAngle(0); //The wheel angle
-      car.setSpeed(50);// The speed
+      car.setAngle(0);    //The wheel angle
+      car.setSpeed(50);    // The speed
     }
 
     if (currentline.startsWith("turnLeft")) {           // GET the car to turn left
 
       car.setSpeed(50);   //The speed
-      car.setAngle(-75); //The wheel angle for turning left
-    }
+      car.setAngle(-75);    //The wheel angle for turning left
 
+
+    }
     if (currentline.startsWith("turnRight")) {             // GET the car to turn right
 
-      car.setSpeed(50); //The speed
-      car.setAngle(75); //The wheel angle for turning right
-
+      car.setSpeed(50);  //The speed
+      car.setAngle(75);   //The wheel angle for turning right
 
     }
     if (currentline.startsWith("backwards")) {             // GET the car to move backward
 
       car.setSpeed(-50);  //The speed
-      car.setAngle(0); //The wheel angle
+      car.setAngle(0);    //The wheel angle
 
     }
 
 
     if (currentline.startsWith("stop")) {                                 //decrease the speed of the car until it stops
-      car.setSpeed(0); //The speed to 0 to stop the car
+      car.setSpeed(0);  //The speed to 0 to stop the car
     }
 
     if (currentline.startsWith ("driveAuto")) {
-      autoDriving = true; //Boolean for the autonomous driving loop
-      autoDrive();        //Autonomous driving method
+      autoDriving = true;   //Boolean for the autonomous driving loop
+      autoDrive();          //Autonomous driving method
     }
 
     if (currentline.startsWith ("tankLeft") && servo_test.read() < 100) {
@@ -96,15 +95,16 @@ void move () {
 
 void loop() {
 
+
   move();
 
-  //unsigned long CurrentTime = millis();
+  unsigned long CurrentTime = millis();
 
-  unsigned int frontDistance = Sensor.getDistance();      //measure the distance in the front of the car
-  unsigned int backDistance = backSensor.getDistance();   //measure the distance from the back of the car
+  unsigned int frontDistance = Sensor.getDistance();                      //measure the distance in the front of the car`
+  unsigned int backDistance = backSensor.getDistance();                  //measure the distance from the back of the car
 
-  if (car.getSpeed() < 0)  {                                       // get measurements form the back sensor when the car is moving backward.
-
+  if ( car.getSpeed() < 0   &&  backDistance < 400 )  {
+    //if (CurrentTime - previousMillis > 100 ) {                    //set the range of the angle of the servo motors
     String BackDistance = String (backDistance);
     if (backDistance == 0 ) {
       Serial.println("400" );
@@ -112,70 +112,70 @@ void loop() {
     } else  {
       Serial.println(BackDistance + "\n");
     }
+    // previousMillis=CurrentTime;
 
+    //  }
   }
-  if (car.getSpeed() >= 0  ) {
-    // if (CurrentTime - previousMillis > 100 ) {                    //set the range of the angle of the servo motors
+
+
+  if ( car.getSpeed() >= 0 && frontDistance < 400 ) {
+
+    //  if (CurrentTime - previousMillis > 400 ) {                    //set the range of the angle of the servo motors
+
     String FrontDistance = String (frontDistance);
-    if (frontDistance == 0  ) {
+    if (frontDistance == 0 ) {
       Serial.println("400");
+
     }  else {
 
-      Serial.println(FrontDistance + "\n");
+      Serial.println( FrontDistance + "\n");
 
     }
-    //  previousMillis=CurrentTime;
+    //   previousMillis=CurrentTime;
 
-    // }
-
-  }
+  }//
 
 }
 
+
 int lookLeft()
+
 {
   Serial.println("lookLeft \n");
-  int obstacle = 400; //the max distance when no obstacle
-
-  // looping the motor to turn to the left and checking if there is an obstacle
-
-  for (angle = 70 ; angle <= 100; angle += 10)
+  int obstacle = 400;
+  for (angle = 70 ; angle <= 120; angle += 10) // command to move from 180 degrees to 0 degrees
   {
     Serial.println("In the FORLEFT and ANGLE IS " + (String) angle + "\n");
     servo_test.write(angle);              //command to rotate the servo to the specified angle
-    int distance = Sensor.getDistance();  //getting the distance
-
-    //if the there is an obstacle closer than 400, sign the distance to that
+    int distance = Sensor.getDistance();
     if (distance < obstacle && distance != 0 ) {
       Serial.println("In the IFLEFT \n");
       obstacle = distance;
     }
   }
-  servo_test.write(70); //setting the servo motor to turn on the middle
+  servo_test.write(70);
   return obstacle;
 }
 
 int lookRight()
 {
   Serial.println("lookRight \n");
-  int obstacle = 400; //the max distance when no obstacle
-
-  // looping the motor to turn to the left and checking if there is an obstacle
+  int obstacle = 400;
   for (angle = 70 ; angle >= 20; angle -= 10) // command to move from 180 degrees to 0 degrees
   {
     Serial.println("In the FORRIGHT and ANGLE IS " + (String) angle + "\n");
     servo_test.write(angle);              //command to rotate the servo to the specified angle
-    int distance = Sensor.getDistance();  //getting the distance
-
-    //if the there is an obstacle closer than 400, sign the distance to that
+    int distance = Sensor.getDistance();
     if (distance < obstacle && distance != 0) {
       Serial.println("In the IFRIGHT \n");
-      obstacle = Sensor.getDistance();
+      obstacle = distance;
     }
   }
-  servo_test.write(70); //setting the servo motor to turn on the middle
+  servo_test.write(70);
+  Serial.println("The OBSTACLE IS" + (String) obstacle + "\n");
   return obstacle;
 }
+
 
 
 void autoDrive()
@@ -191,45 +191,81 @@ void autoDrive()
     unsigned int distance = Sensor.getDistance(); //getting the distance
     Serial.println((String) Sensor.getDistance() + "\n");
 
-    if (Sensor.getDistance() <= 50 && distance > 0) {
+
+
+    if (Sensor.getDistance() <= 40 && distance > 0 ) {
       Serial.println("autoDrive too Small distance ");
       car.setSpeed(0);  //Stop the car is there is an obstacle
       distanceR = lookRight(); //Get the distance on the right side
+      delay(500);
       distanceL = lookLeft(); //Get the distance on the left side
 
       Serial.println((String) distanceR + "the right value \n");
       Serial.println((String) distanceL + "the left value \n");
 
       //Choosing which way to take according to the distance on the left and on the right
-      if (distanceR >= distanceL) //turning right
-      {
-        Serial.println("the car turning right \n");
-        car.rotate(60); //turning the wheels to the right
-        car.setSpeed(50); //setting the speed
+
+      if (distanceR <= 40 && distanceL <= 40 ) {        // if the right and left distances are less than 40 the car should go back and checks again
+
+        Serial.println("Should go back");
+        car.setSpeed(-40);
+        delay(1200);
+        car.setSpeed(0);
+        delay(200);
+        distanceR = lookRight(); //Get the distance on the right side
+        delay(500);
+        distanceL = lookLeft(); //Get the distance on the left side
+       
+        if (distanceR >= distanceL) //turning right
+        {
+
+          Serial.println("the car turning right \n");
+          car.rotate(60);    //turning the wheels to the right
+          car.setSpeed(50); //setting the speed
+
+        }
+
+        if (distanceR < distanceL) //turning left
+        {
+          Serial.println("the car turning left \n");
+          car.rotate(-60); //turning the wheels to the left
+          car.setSpeed(50); //setting the speed
+
+        }
       }
 
-      else if (distanceR < distanceL) //turning left
+      if (distanceR >= distanceL) //turning right
+      {
+
+        Serial.println("the car turning right \n");
+        car.rotate(60);    //turning the wheels to the right
+        car.setSpeed(50); //setting the speed
+
+      }
+
+      if (distanceR < distanceL) //turning left
       {
         Serial.println("the car turning left \n");
         car.rotate(-60); //turning the wheels to the left
         car.setSpeed(50); //setting the speed
 
       }
-    }
 
-    //if there is no obstacle in the front of the car, drive forward
-    else {
-      Serial.println("the car driving forward \n");
-      car.setSpeed(50); //setting the speed to 40
-    }
 
-    String currentline2 = Serial.readStringUntil(':');
+      //if there is no obstacle in the front of the car, drive forward
+      else {
+        Serial.println("the car driving forward \n");
+        car.setSpeed(50); //setting the speed to 40
+      }
 
-    //if the input is stopAuto, break the loop of the autonomous driving
-    if (currentline2.startsWith("stopAuto")) {
-      car.setSpeed(0); //set the speed to 0 to stop the car
-      servo_test.write(70);
-      break;           // break to loop
+      String currentline2 = Serial.readStringUntil(':');
+
+      //if the input is stopAuto, break the loop of the autonomous driving
+      if (currentline2.startsWith("stopAuto")) {
+        car.setSpeed(0); //set the speed to 0 to stop the car
+        servo_test.write(70);
+        break;           // break to loop
+      }
     }
   }
 }

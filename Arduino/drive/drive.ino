@@ -20,7 +20,11 @@ int speedSet = 0;
 unsigned long previousMillis = 0;
 unsigned long sensorMillis = 0;
 boolean revAngle = true;
-
+unsigned int frontDistance;
+unsigned int backDistance;
+boolean autostop = true ;
+int distanceR;
+int distanceL;
 
 void setup() {
   servo_test.attach(30);                                // attach the servo to pin 30
@@ -38,61 +42,74 @@ void move () {
 
   Serial.readBytes(inputBuffer, Serial.available());      // reads characters from the serial port into a buffer
   String currentline = Serial.readStringUntil(':');
-
-  if (currentline.startsWith("forward")) {                                      // move the car forward
-   
-    car.setAngle(0);
-    car.setSpeed(50);
-  }
-
-  if (currentline.startsWith("turnLeft")) {           // GET the car to turn left
-
-    car.setSpeed(50);
-    car.setAngle(-75);
-
-
+  if (frontDistance <= 5 && (currentline.startsWith("autostop")) ) {
+    car.setSpeed(0);
 
   }
-  if (currentline.startsWith("turnRight")) {             // GET the car to turn right
+  else {
+    if (currentline.startsWith("forward")) {                                      // move the car forward
 
-    car.setSpeed(50);
-    car.setAngle(75);
+      car.setAngle(0);
+      car.setSpeed(50);
 
+
+
+    }
+
+    if (currentline.startsWith("turnLeft")) {           // GET the car to turn left
+
+      car.setSpeed(50);
+      car.setAngle(-75);
+
+
+
+    }
+    if (currentline.startsWith("turnRight")) {             // GET the car to turn right
+
+      car.setSpeed(50);
+      car.setAngle(75);
+
+    }
 
   }
-  if (currentline.startsWith("backwards")) {             // GET the car to move backward
-
-    car.setSpeed(-50);
-    car.setAngle(0);
-
+  if (backDistance  <= 5 && (currentline.startsWith("autostop"))) {
+    car.setSpeed(0);
   }
+  else {
+    if (currentline.startsWith("backwards")) {             // GET the car to move backward
 
+      car.setSpeed(-50);
+      car.setAngle(0);
+
+
+    }
+  }
 
   if (currentline.startsWith("stop")) {                                 //decrease the speed of the car until it stops
-      car.setSpeed(0);
-}
+    car.setSpeed(0);
+  }
 }
 void loop() {
 
 
   move();
 
+  frontDistance = Sensor.getDistance();
+  backDistance = backSensor.getDistance();
 
-  unsigned int frontDistance = Sensor.getDistance();
-  unsigned int backDistance = backSensor.getDistance();
   Serial.println(car.getSpeed());
   if (car.getSpeed() >= 0  ) {                                          //get measurements fro the front sensor when the car's speed is positive
 
     String Frontdistance = String (frontDistance);
     Serial.println(Frontdistance + "\n");
 
- 
+
   }
 
   else if (car.getSpeed() < 0)  {                                       // get measurements form the back sensor when the car is moving backward.
 
     String BackDistance = String (backDistance);
-    Serial.println(BackDistance + "\n");   
+    Serial.println(BackDistance + "\n");
 
   }
   unsigned long CurrentTime = millis();

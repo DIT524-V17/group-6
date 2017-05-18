@@ -36,7 +36,7 @@ public class ControllerSettings extends AppCompatActivity {
         connect.setOnClickListener(buttonConnectOnClickListener);
         ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
         toggle.setChecked(client.onOff);
-CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox)
+CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -64,7 +64,7 @@ CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox)
 
                     client.sendCommands("autoStop:\n");
                     client.onOff = true;
-                } 
+                }
             }
         });
     }

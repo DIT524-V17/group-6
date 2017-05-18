@@ -22,7 +22,7 @@ public class ControllerSettings extends AppCompatActivity {
     MainActivity main;
     ToggleButton toggleButton;
     private static final String TAG = "ControllerSettings";
-    CheckBox checkBox ;
+    CheckBox checkBox;
 
     //Finds the various buttons in the XML-file
     @Override
@@ -53,11 +53,9 @@ CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
                 }
             }
         });
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
                     Log.i(TAG, "autostop:");
@@ -78,7 +76,7 @@ CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
             int lastPort = Integer.parseInt(port.getText().toString());
             Log.i(TAG, "Clicking on connect");
             client.connect(ip, lastPort);
-           // main.playStream(ip);
+            // main.playStream(ip);
         }
     };
 
@@ -89,6 +87,6 @@ CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
 
     }
 
-   }
+}
 
 

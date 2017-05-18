@@ -52,6 +52,9 @@ void move () {
 
       autoStop = true;
 
+
+      car.setAngle(0);    //The wheel angle
+      car.setSpeed(50);    // The speed
     }
 
 
@@ -74,6 +77,7 @@ void move () {
       car.setAngle(0);
     }  //The wheel angle
 
+      car.setAngle(0);    //The wheel angle
 
 
 
@@ -121,6 +125,15 @@ void loop() {
   unsigned long CurrentTime = millis();
 
 
+
+
+
+  move();
+
+  unsigned long CurrentTime = millis();
+
+  unsigned int frontDistance = Sensor.getDistance();                      //measure the distance in the front of the car`
+  unsigned int backDistance = backSensor.getDistance();                  //measure the distance from the back of the car
 
   if ( car.getSpeed() < 0   &&  backDistance < 400 )  {
     //if (CurrentTime - previousMillis > 100 ) {                    //set the range of the angle of the servo motors

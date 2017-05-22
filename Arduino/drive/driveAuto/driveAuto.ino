@@ -211,7 +211,7 @@ void autoDrive()
 
 
 
-    if (Sensor.getDistance() <= 40 && distance > 0 ) {
+    if (distance <= 45 && distance > 0 ) {
       Serial.println("autoDrive too Small distance ");
       car.setSpeed(0);  //Stop the car is there is an obstacle
       distanceR = lookRight(); //Get the distance on the right side
@@ -271,19 +271,20 @@ void autoDrive()
 
 
       //if there is no obstacle in the front of the car, drive forward
-      else {
-        Serial.println("the car driving forward \n");
-        car.setSpeed(50); //setting the speed to 40
-      }
-
-      String currentline2 = Serial.readStringUntil(':');
-
-      //if the input is stopAuto, break the loop of the autonomous driving
-      if (currentline2.startsWith("stopAuto")) {
-        car.setSpeed(0); //set the speed to 0 to stop the car
-        servo_test.write(70);
-        break;           // break to loop
-      }
+    } else {
+      Serial.println("the car driving forward \n");
+      car.setAngle(0);
+      car.setSpeed(40); //setting the speed to 40
     }
+
+    String currentline2 = Serial.readStringUntil(':');
+
+    //if the input is stopAuto, break the loop of the autonomous driving
+    if (currentline2.startsWith("stopAuto")) {
+      car.setSpeed(0); //set the speed to 0 to stop the car
+      servo_test.write(70);
+      break;           // break to loop
+    }
+
   }
 }

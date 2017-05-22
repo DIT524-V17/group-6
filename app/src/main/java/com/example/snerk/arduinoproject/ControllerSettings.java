@@ -22,7 +22,7 @@ public class ControllerSettings extends AppCompatActivity {
     MainActivity main;
     ToggleButton toggleButton;
     private static final String TAG = "ControllerSettings";
-    CheckBox checkBox ;
+    CheckBox checkBox;
 
     //Finds the various buttons in the XML-file
     @Override

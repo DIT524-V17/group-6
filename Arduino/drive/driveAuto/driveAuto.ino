@@ -21,7 +21,7 @@ boolean revAngle = true;
 boolean autoDriving = false;
 int distanceR;
 int distanceL;
-boolean autoStop = false  ;
+boolean autoStop = false;  //added me
 
 void setup() {
   servo_test.attach(30);                                // attach the servo to pin 30
@@ -44,20 +44,19 @@ void move () {
     if (currentline.startsWith("forward")) {                                      // move the car forward
 
       car.setAngle(0);    //The wheel angle
-      car.setSpeed(50);
-    }   // The speed
-
-
-    if (currentline.startsWith("autostop")) {           // turn on autostop
-
-      autoStop = true;
-
-
-      car.setAngle(0);    //The wheel angle
       car.setSpeed(50);    // The speed
     }
 
+    if (currentline.startsWith("autoStop")) {           // turn on autostop
 
+      autoStop = true;
+
+    }
+    if (currentline.startsWith("autoStopOff")) {           // turn off autostop
+
+      autoStop = false;
+
+    }
     if (currentline.startsWith("turnLeft")) {           // GET the car to turn left
 
       car.setSpeed(50);   //The speed
@@ -74,11 +73,9 @@ void move () {
     if (currentline.startsWith("backwards")) {             // GET the car to move backward
 
       car.setSpeed(-50);  //The speed
-      car.setAngle(0);
-    }  //The wheel angle
-
       car.setAngle(0);    //The wheel angle
 
+    }
 
 
     if (currentline.startsWith("stop")) {                                 //decrease the speed of the car until it stops
@@ -108,32 +105,21 @@ void move () {
 }
 
 void loop() {
+
+
   move();
+
+  unsigned long CurrentTime = millis();
+
   unsigned int frontDistance = Sensor.getDistance();                      //measure the distance in the front of the car`
   unsigned int backDistance = backSensor.getDistance();                  //measure the distance from the back of the car
-  Serial.println("meist");
-  if (autoStop && (frontDistance <= 20 && frontDistance > 5))
-  {
-    Serial.println("me");
-
+Serial.println("me");
+  if (autoStop && (frontDistance <= 20 && frontDistance > 0) ) //med added
+  {Serial.println("you");
     car.setSpeed(0);
-    delay(500);
-    Serial.println("meafter");
+    Serial.println("them");
+    
   }
-
-
-  unsigned long CurrentTime = millis();
-
-
-
-
-
-  move();
-
-  unsigned long CurrentTime = millis();
-
-  unsigned int frontDistance = Sensor.getDistance();                      //measure the distance in the front of the car`
-  unsigned int backDistance = backSensor.getDistance();                  //measure the distance from the back of the car
 
   if ( car.getSpeed() < 0   &&  backDistance < 400 )  {
     //if (CurrentTime - previousMillis > 100 ) {                    //set the range of the angle of the servo motors
@@ -301,4 +287,3 @@ void autoDrive()
     }
   }
 }
-

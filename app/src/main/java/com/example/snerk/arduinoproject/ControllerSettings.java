@@ -58,13 +58,13 @@ public class ControllerSettings extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
-                    Log.i(TAG, "autostop:");
+                    Log.i(TAG, "autoStop:");
 
                     client.sendCommands("autoStop:\n");
                     client.onOff = true;
                 }
                 else {
-                    Log.i(TAG, "autostopoff:");
+                    Log.i(TAG, "autoStopOff:");
                     client.sendCommands("autoStopOff:\n");
                     client.onOff = false;
 

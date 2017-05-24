@@ -100,5 +100,5 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginTop="97dp"
-        android:text="CheckBox" />
+        android:text="Crash avoidance" />
 </RelativeLayout>

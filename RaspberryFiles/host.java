@@ -20,7 +20,6 @@ class host {
 
 		BufferedReader bufferedReader = null;
 		PrintStream printStream = null;
-		//Arduino arduino = null;
 		PrintWriter printWriter = null;
 		SerialPort serialPort = SerialPort.getCommPort("/dev/ttyACM0");
 		try {
@@ -37,8 +36,6 @@ class host {
 
 			OutputStream outputStream = socket.getOutputStream();
 			printWriter = new PrintWriter(outputStream, true);
-			
-			printWriter.println("Connected");
 
 			arduino = new Arduino("/dev/ttyACM0", 9600);
 			arduino.openConnection();

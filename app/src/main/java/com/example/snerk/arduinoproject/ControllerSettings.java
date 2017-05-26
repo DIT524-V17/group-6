@@ -35,9 +35,9 @@ public class ControllerSettings extends AppCompatActivity {
         connect = (Button) findViewById(R.id.connect);
         connect.setOnClickListener(buttonConnectOnClickListener);
         ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
-        toggle.setChecked(client.onOff);
+        toggle.setChecked(client.onOff2);
         CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
-
+        checkBox.setChecked(onOff);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -45,15 +45,16 @@ public class ControllerSettings extends AppCompatActivity {
                     Log.i(TAG, "driveAuto:");
 
                     client.sendCommands("driveAuto:\n");
-                    client.onOff = true;
+                    client.onOff2 = true;
                 } else {
                     Log.i(TAG, "stopAuto:");
                     client.sendCommands("stopAuto:\n");
-                    client.onOff = false;
+                    client.onOff2 = false;
 
                 }
             }
         });
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {

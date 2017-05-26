@@ -38,6 +38,8 @@ public class Client {
     }
 
     public static boolean onOff;
+    public static boolean onOff2;
+
     //Connecting to the RaspberryPI-server
     public void connect(String ipAdress, int port) {
         try {

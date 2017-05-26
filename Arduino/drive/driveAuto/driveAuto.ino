@@ -191,7 +191,6 @@ void autoDrive()
     if (distance <= 45 && distance > 0 ) {
       car.setSpeed(0);  //Stop the car is there is an obstacle
       distanceR = lookRight(); //Get the distance on the right side
-      delay(500);
       distanceL = lookLeft(); //Get the distance on the left side
 
       //Choosing which way to take according to the distance on the left and on the right
@@ -201,9 +200,7 @@ void autoDrive()
         car.setSpeed(-40);
         delay(1200);
         car.setSpeed(0);
-        delay(200);
         distanceR = lookRight(); //Get the distance on the right side
-        delay(500);
         distanceL = lookLeft(); //Get the distance on the left side
       }
 
